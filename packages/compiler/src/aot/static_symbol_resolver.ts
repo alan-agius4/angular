@@ -334,7 +334,7 @@ export class StaticSymbolResolver {
     }
 
     // handle the actual metadata. Has to be after the exports
-    // as there migth be collisions in the names, and we want the symbols
+    // as there might be collisions in the names, and we want the symbols
     // of the current module to win ofter reexports.
     if (metadata['metadata']) {
       // handle direct declarations of the symbol
@@ -345,7 +345,7 @@ export class StaticSymbolResolver {
         const symbolMeta = metadata['metadata'][metadataKey];
         const name = unescapeIdentifier(metadataKey);
 
-        const symbol = this.getStaticSymbol(filePath, name);
+        const symbol = this.getStaticSymbol(filePath, name, symbolMeta.members);
 
         const origin = origins.hasOwnProperty(metadataKey) && origins[metadataKey];
         if (origin) {
