@@ -12,6 +12,7 @@
   },
   "typings": "./src/ngc-wrapped/index.d.ts",
   "dependencies": {
+    "@microsoft/api-extractor": "7.0.11",
     "@angular-devkit/architect": "^0.10.6",
     "@angular-devkit/core": "^7.0.4",
     "@angular-devkit/schematics": "^7.0.4",
