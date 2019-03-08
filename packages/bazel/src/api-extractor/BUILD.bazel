@@ -33,4 +33,5 @@ nodejs_binary(
 filegroup(
     name = "package_assets",
     srcs = ["BUILD.bazel"],
+    visibility = ["//packages/bazel:__subpackages__"],
 )
