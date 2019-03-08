@@ -16,8 +16,8 @@ ts_library(
         "@npm//@types/node",
     ],
 )
-
 # END-DEV-ONLY
+
 nodejs_binary(
     name = "api_extractor",
     data = [
