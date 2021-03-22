@@ -137,7 +137,7 @@ export function zoneWrappedInterceptingHandler(
 }
 
 export const SERVER_HTTP_PROVIDERS: Provider[] = [
-  {provide: XhrFactory, useClass: ServerXhr}, {
+  {provide: XhrFactory, useClass: ServerXhr, multi: false}, {
     provide: HttpHandler,
     useFactory: zoneWrappedInterceptingHandler,
     deps: [HttpBackend, Injector, PlatformLocation, INITIAL_CONFIG]

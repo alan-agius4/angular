@@ -159,8 +159,6 @@ export class HttpClientXsrfModule {
     {provide: HttpHandler, useClass: HttpInterceptingHandler},
     HttpXhrBackend,
     {provide: HttpBackend, useExisting: HttpXhrBackend},
-    BrowserXhr,
-    {provide: XhrFactory, useExisting: BrowserXhr},
   ],
 })
 export class HttpClientModule {

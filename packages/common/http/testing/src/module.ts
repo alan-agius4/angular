@@ -6,7 +6,7 @@
  * found in the LICENSE file at https://angular.io/license
  */
 
-import {HttpBackend, HttpClientModule} from '@angular/common/http';
+import {HttpBackend, HttpClientModule, XhrFactory, ɵBrowserXhr as BrowserXhr} from '@angular/common/http';
 import {NgModule} from '@angular/core';
 
 import {HttpTestingController} from './api';
@@ -26,6 +26,8 @@ import {HttpClientTestingBackend} from './backend';
   ],
   providers: [
     HttpClientTestingBackend,
+    BrowserXhr,
+    {provide: XhrFactory, useExisting: BrowserXhr},
     {provide: HttpBackend, useExisting: HttpClientTestingBackend},
     {provide: HttpTestingController, useExisting: HttpClientTestingBackend},
   ],
