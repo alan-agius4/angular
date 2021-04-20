@@ -6,8 +6,7 @@
   "separateMajorMinor": false,
   "labels": [
     "target: minor",
-    "comp: build & ci",
-    "action: merge"
+    "comp: build & ci"
   ],
   "timezone": "America/Tijuana",
   "lockFileMaintenance": {
