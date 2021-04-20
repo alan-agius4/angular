@@ -40,7 +40,12 @@
     "angular-mocks-1.7",
     "puppeteer",
     "rollup",
-    "selenium-webdriver"
+    "selenium-webdriver",
+    
+    
+"chalk","core-js",
+"karma-sauce-launcher","remark","remark-html","tsickle","systemjs",
+"terser","w0orker-plugin","@octokit/rest"
   ],
   "packageFiles": [
     "WORKSPACE",
