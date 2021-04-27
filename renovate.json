@@ -113,23 +113,22 @@
       "enabled": false
     },
     {
-      "packageRules": [
-        {
-          "excludePackagePatterns" :[
-            "^@angular/.*",
-            "^@angular-devkit/.*",
-            "^@schematics/.*"
-          ],
-          "matchPackagePatterns": [
-            "*"
-          ],
-          "matchUpdateTypes": [
-            "minor",
-            "patch"
-          ],
-          "groupName": "all non-major dependencies",
-          "groupSlug": "all-minor-patch"
-        }
+      "excludePackagePatterns": [
+        "^@angular/.*",
+        "^@angular-devkit/.*",
+        "^@schematics/.*"
+      ],
+      "matchPackagePatterns": [
+        "*"
+      ],
+      "matchUpdateTypes": [
+        "minor",
+        "patch"
+      ],
+      "groupName": "all non-major dependencies",
+      "groupSlug": "all-minor-patch",
+      "schedule": [
+        "every Thursday"
       ]
     }
   ]
