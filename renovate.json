@@ -128,7 +128,7 @@
       "groupName": "all non-major dependencies",
       "groupSlug": "all-minor-patch",
       "schedule": [
-        "every Thursday"
+        "after 1am on Thursday"
       ]
     }
   ]
