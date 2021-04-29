@@ -118,8 +118,8 @@
         "patch"
       ],
       "matchCurrentVersion": "!/^0\./",
-      "groupName": "all non-major dependencies",
-      "groupSlug": "all-minor-patch"
+      "groupName": "all non-major dependesncies",
+      "groupSlug": "all-minor-patsch"
     }
   ]
 }
