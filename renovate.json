@@ -3,6 +3,7 @@
   "semanticCommits": true,
   "semanticPrefix": "build",
   "separateMajorMinor": false,
+  "prHourlyLimit": 2,
   "labels": [
     "target: minor",
     "comp: build & ci",
@@ -116,9 +117,9 @@
         "minor",
         "patch"
       ],
-      "matchCurrentVersion": "!/^0\\./",
-      "groupName": "all non-major dependesncies",
-      "groupSlug": "all-minor-patsch"
+      "matchCurrentVersion": "!^0",
+      "groupName": "all non-major dependencies",
+      "groupSlug": "all-minor-patch"
     }
   ]
 }
