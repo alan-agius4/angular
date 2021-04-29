@@ -13,11 +13,6 @@
   "lockFileMaintenance": {
     "enabled": true
   },
-  "schedule": [
-    "after 10pm every weekday",
-    "before 4am every weekday",
-    "every weekend"
-  ],
   "baseBranches": [
     "master"
   ],
@@ -46,8 +41,6 @@
     "angular-mocks-1.7",
     "puppeteer",
     "rollup",
-    "remark",
-    "remark-html",
     "selenium-webdriver"
   ],
   "packageFiles": [
@@ -128,11 +121,9 @@
         "minor",
         "patch"
       ],
+      "matchCurrentVersion": "!/^0\\./",
       "groupName": "all non-major dependencies",
-      "groupSlug": "all-minor-patch",
-      "schedule": [
-        "after 1am on Thursday"
-      ]
+      "groupSlug": "all-minor-patch"
     }
   ]
 }
