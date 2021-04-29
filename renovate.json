@@ -3,7 +3,6 @@
   "semanticCommits": true,
   "semanticPrefix": "build",
   "separateMajorMinor": false,
-  "prHourlyLimit": 2,
   "labels": [
     "target: minor",
     "comp: build & ci",
