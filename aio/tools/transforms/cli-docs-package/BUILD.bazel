@@ -11,6 +11,7 @@ js_library(
     ),
     visibility = ["//aio/tools/transforms:__subpackages__"],
     deps = [
+        "//aio/content/cli:cli_help",
         "//aio/tools/transforms",
         "//aio/tools/transforms/angular-base-package",
         "//aio/tools/transforms/content-package",
@@ -20,7 +21,6 @@ js_library(
         "@aio_npm//dgeni",
         "@aio_npm//json5",
         "@aio_npm//semver",
-        "@angular_cli_src//:files_for_docgen",
     ],
 )
 

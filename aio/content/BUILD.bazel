@@ -4,6 +4,9 @@ filegroup(
     name = "content",
     srcs = glob(
         ["**"],
-        exclude = ["BUILD.bazel"],
+        exclude = [
+            "BUILD.bazel",
+            "cli/help/**",
+        ],
     ),
 )

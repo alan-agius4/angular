@@ -1,0 +1,6 @@
+filegroup(
+    name = "cli_help",
+    srcs = glob(
+        ["help/**/*.json"],
+    ),
+)
