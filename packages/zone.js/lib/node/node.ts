@@ -108,6 +108,36 @@ Zone.__load_patch(
       }
     });
 
+function readableObjectToString(obj: any) {
+  if (obj && obj.toString === Object.prototype.toString) {
+    const className = obj.constructor?.name ?? '';
+    return className + ': ' + JSON.stringify(obj);
+  }
+
+  return obj ? obj.toString() : Object.prototype.toString.call(obj);
+}
+
+Zone.__load_patch('unhandledRejection', (global: any, Zone: ZoneType, api: _ZonePrivate) => {
+  process.on('unhandledRejection', (reason: any, promise) => {
+    let uncaughtPromiseError = reason;
+    try {
+      // Here we throws a new Error to print more readable error log
+      // and if the value is not an error, zone.js builds an `Error`
+      // Object here to attach the stack information.
+      throw new Error(
+          'Uncaught (in promise): ' + readableObjectToString(reason) +
+          (reason?.stack ? '\n' + reason.stack : ''));
+    } catch (err) {
+      uncaughtPromiseError = err;
+    }
+    uncaughtPromiseError.rejection = reason;
+    uncaughtPromiseError.promise = promise;
+    uncaughtPromiseError.zone = Zone.current;
+    uncaughtPromiseError.task = Zone.currentTask;
+    api.onUnhandledError(uncaughtPromiseError);
+    api.scheduleMicroTask();  // to make sure that it is running
+  });
+});
 
 // Crypto
 Zone.__load_patch('crypto', () => {
