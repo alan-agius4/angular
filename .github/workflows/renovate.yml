@@ -15,3 +15,4 @@ jobs:
         uses: renovatebot/github-action@v40.3.4
         with:
           configurationFile: ./runner-config.js
+          token: ${{ secrets.RENOVATE_TOKEN }}
