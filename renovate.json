@@ -12,10 +12,11 @@
   "separateMajorMinor": false,
   "prHourlyLimit": 3,
   "timezone": "America/Tijuana",
+  
+    "allowedPostUpgradeCommands": ["."],
   "lockFileMaintenance": {"enabled": true},
   "labels": ["target: patch", "area: build & ci", "action: merge"],
   "postUpgradeTasks": {
-    "allowedPostUpgradeCommands": ["."]
     "commands": [
       "yarn renovate-update-generated-files"
     ],
