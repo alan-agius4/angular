@@ -15,6 +15,7 @@
   "lockFileMaintenance": {"enabled": true},
   "labels": ["target: patch", "area: build & ci", "action: merge"],
   "postUpgradeTasks": {
+    "allowedPostUpgradeCommands": ["."]
     "commands": [
       "yarn renovate-update-generated-files"
     ],
