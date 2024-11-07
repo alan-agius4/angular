@@ -2,6 +2,6 @@
   "name": "ng-renovate",
   "type": "commonjs",
   "dependencies": {
-    "renovate": "38.140.2"
+    "renovate": "39.7.3"
   }
 }
