@@ -1,0 +1,35 @@
+/**
+ * @license
+ * Copyright Google LLC All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.dev/license
+ */
+import { ɵBrowserDomAdapter as BrowserDomAdapter } from '@angular/platform-browser';
+export declare function setDomTypes(): void;
+/**
+ * Parses a document string to a Document object.
+ */
+export declare function parseDocument(html: string, url?: string): any;
+/**
+ * Serializes a document to string.
+ */
+export declare function serializeDocument(doc: Document): string;
+/**
+ * DOM Adapter for the server platform based on https://github.com/fgnass/domino.
+ */
+export declare class DominoAdapter extends BrowserDomAdapter {
+    static makeCurrent(): void;
+    readonly supportsDOMEvents = false;
+    private static defaultDoc;
+    createHtmlDocument(): Document;
+    getDefaultDocument(): Document;
+    isElementNode(node: any): boolean;
+    isShadowRoot(node: any): boolean;
+    /** @deprecated No longer being used in Ivy code. To be removed in version 14. */
+    getGlobalEventTarget(doc: Document, target: string): EventTarget | null;
+    getBaseHref(doc: Document): string;
+    dispatchEvent(el: Node, evt: any): void;
+    getUserAgent(): string;
+    getCookie(name: string): string;
+}
