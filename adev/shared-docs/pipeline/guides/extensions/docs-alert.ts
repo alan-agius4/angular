@@ -49,6 +49,8 @@ export const docsAlertExtension = {
           severityLevel: level,
           alert: possibleMatch,
         };
+
+        break;
       }
     }
 
