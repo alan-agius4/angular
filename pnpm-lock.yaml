@@ -105,8 +105,8 @@ importers:
         specifier: ^3.5.27
         version: 3.5.42
       '@types/chrome':
-        specifier: ^0.0.317
-        version: 0.0.317
+        specifier: ^0.0.320
+        version: 0.0.320
       '@types/convert-source-map':
         specifier: ^2.0.0
         version: 2.0.3
@@ -282,8 +282,8 @@ importers:
         specifier: 3.5.0
         version: 3.5.0
       selenium-webdriver4:
-        specifier: npm:selenium-webdriver@4.31.0
-        version: /selenium-webdriver@4.31.0
+        specifier: npm:selenium-webdriver@4.32.0
+        version: /selenium-webdriver@4.32.0
       semver-dsl:
         specifier: ^1.0.1
         version: 1.0.1
@@ -5520,8 +5520,8 @@ packages:
     resolution: {integrity: sha512-hWtVTC2q7hc7xZ/RLbxapMvDMgUnDvKvMOpKal4DrMyfGBUfB1oKaZlIRr6mJL+If3bAP6sV/QneGzF6tJjZDg==}
     dev: true
 
-  /@types/chrome@0.0.317:
-    resolution: {integrity: sha512-ibKycbXX8ZZToFshjgWg98BTvFUSvQht8m53Xc+87ye3Z6ZoHJubLjoiDsil8rtW+noWE+Z0+7y0nwLxArU+CQ==}
+  /@types/chrome@0.0.320:
+    resolution: {integrity: sha512-LD0O6hqayM4/InMUB2fOGSh7lFkUlusa40mk6iUAxs0RHfvRYjjsDoRGsDh2DEJWP4Ckccf00FVhkhDHHIqy7g==}
     dependencies:
       '@types/filesystem': 0.0.36
       '@types/har-format': 1.2.16
@@ -15994,6 +15994,20 @@ packages:
     transitivePeerDependencies:
       - bufferutil
       - utf-8-validate
+    dev: true
+
+  /selenium-webdriver@4.32.0:
+    resolution: {integrity: sha512-dG48JJnB96Aea1iVaZOKGmd6yT6aemeI1heWI/i8DtfD3pDX7uIlwpDBoGauNhtXAaFaamP+U4hIab8zZkg3Ag==}
+    engines: {node: '>= 18.20.5'}
+    dependencies:
+      '@bazel/runfiles': 6.3.1
+      jszip: 3.10.1
+      tmp: 0.2.3
+      ws: 8.18.1
+    transitivePeerDependencies:
+      - bufferutil
+      - utf-8-validate
+    dev: false
 
   /selfsigned@2.4.1:
     resolution: {integrity: sha512-th5B4L2U+eGLq1TVh7zNRGBapioSORUeymIydxgFpwww9d2qyKvtuPU2jJuHvYAwwqi2Y596QBL3eEqcPEYL8Q==}
