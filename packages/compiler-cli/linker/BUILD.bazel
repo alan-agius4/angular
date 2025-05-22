@@ -1,3 +1,4 @@
+load("@npm//@bazel/esbuild:index.bzl", "esbuild", "esbuild_config")
 load("//tools:defaults.bzl", "ts_library")
 
 package(default_visibility = ["//visibility:public"])
@@ -16,5 +17,39 @@ ts_library(
         "@npm//@types/semver",
         "@npm//semver",
         "@npm//typescript",
+    ],
+)
+
+esbuild_config(
+    name = "esbuild_config",
+    config_file = "esbuild.config.js",
+)
+
+esbuild(
+    name = "bundles",
+    config = ":esbuild_config",
+    entry_points = [
+        "//packages/compiler-cli/linker:index.ts",
+        "//packages/compiler-cli/linker/babel:index.ts",
+    ],
+    external = [
+        "@angular/compiler",
+        "typescript",
+        "@babel/core",
+        "reflect-metadata",
+        "chokidar",
+        "convert-source-map",
+        "semver",
+        "@jridgewell/sourcemap-codec",
+        "tslib",
+        "yargs",
+    ],
+    format = "esm",
+    platform = "node",
+    splitting = True,
+    target = "node20",
+    deps = [
+        "//packages/compiler-cli/linker",
+        "//packages/compiler-cli/linker/babel",
     ],
 )

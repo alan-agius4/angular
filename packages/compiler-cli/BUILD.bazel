@@ -9,8 +9,6 @@ package(default_visibility = ["//visibility:public"])
 PUBLIC_TARGETS = [
     ":compiler-cli",
     "//packages/compiler-cli/private",
-    "//packages/compiler-cli/linker",
-    "//packages/compiler-cli/linker/babel",
 ]
 
 npm_link_all_packages()
@@ -46,8 +44,6 @@ esbuild(
         ":index.ts",
         "//packages/compiler-cli:src/bin/ngc.ts",
         "//packages/compiler-cli:src/bin/ng_xi18n.ts",
-        "//packages/compiler-cli/linker:index.ts",
-        "//packages/compiler-cli/linker/babel:index.ts",
         "//packages/compiler-cli/private:bazel.ts",
         "//packages/compiler-cli/private:localize.ts",
         "//packages/compiler-cli/private:migrations.ts",
@@ -68,7 +64,7 @@ esbuild(
     format = "esm",
     platform = "node",
     splitting = True,
-    target = "node12",
+    target = "node20",
     deps = PUBLIC_TARGETS,
 )
 
@@ -141,6 +137,7 @@ pkg_npm(
     deps = [
         ":api_type_definitions",
         ":bundles",
+        "//packages/compiler-cli/linker:bundles",
     ],
 )
 

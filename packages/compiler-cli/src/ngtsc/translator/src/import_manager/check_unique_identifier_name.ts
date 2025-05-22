@@ -7,7 +7,6 @@
  */
 
 import ts from 'typescript';
-
 import type {ImportManagerConfig} from './import_manager';
 
 /** Extension of `ts.SourceFile` with metadata fields that are marked as internal. */

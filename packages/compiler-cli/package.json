@@ -18,11 +18,11 @@
     },
     "./linker": {
       "types": "./linker/index.d.ts",
-      "default": "./bundles/linker/index.js"
+      "default": "./linker/bundles/index.js"
     },
     "./linker/babel": {
       "types": "./linker/babel/index.d.ts",
-      "default": "./bundles/linker/babel/index.js"
+      "default": "./linker/bundles/babel/index.js"
     },
     "./private/bazel": {
       "types": "./private/bazel.d.ts",
