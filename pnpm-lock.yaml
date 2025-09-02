@@ -8,13 +8,11 @@ overrides:
   https-proxy-agent: 7.0.6
   saucelabs: 9.0.2
 
-packageExtensionsChecksum: d67b1f07b351844d00c57cbace376860
-
-pnpmfileChecksum: vld6thchsqj664odlna7qhh4w4
+packageExtensionsChecksum: sha256-3L73Fw32UVtE6x5BJxJPBtQtH/mgsr31grNpdhHP1IY=
 
 patchedDependencies:
   dagre-d3-es@7.0.11:
-    hash: dp4f5qlzqey4wb2gylte6hyt4q
+    hash: 08ae1f30d46402ef53e1486454faa875683cf4152a8aab71ac255078ebfaccdd
     path: tools/pnpm-patches/dagre-d3-es+7.0.11.patch
 
 importers:
@@ -23,7 +21,7 @@ importers:
     dependencies:
       '@angular-devkit/build-angular':
         specifier: 20.2.0-next.2
-        version: 20.2.0-next.2(@angular/ssr@20.2.0-next.2)(@types/node@18.19.121)(chokidar@4.0.3)(jiti@1.21.7)(karma@6.4.4)(protractor@7.0.0)(tsx@4.20.3)(typescript@5.9.2)(yaml@2.8.0)
+        version: 20.2.0-next.2(@angular/compiler-cli@packages+compiler-cli)(@angular/compiler@packages+compiler)(@angular/core@packages+core)(@angular/platform-browser@packages+platform-browser)(@angular/platform-server@packages+platform-server)(@angular/service-worker@packages+service-worker)(@angular/ssr@20.2.0-next.2(@angular/common@packages+common)(@angular/core@packages+core)(@angular/platform-server@packages+platform-server)(@angular/router@packages+router))(@types/node@18.19.121)(chokidar@4.0.3)(jiti@1.21.7)(karma@6.4.4)(protractor@7.0.0)(tsx@4.20.3)(typescript@5.9.2)(yaml@2.8.0)
       '@angular-devkit/core':
         specifier: 20.2.0-next.2
         version: 20.2.0-next.2(chokidar@4.0.3)
@@ -35,10 +33,10 @@ importers:
         version: link:packages/animations
       '@angular/build':
         specifier: 20.2.0-next.2
-        version: 20.2.0-next.2(@angular/ssr@20.2.0-next.2)(@types/node@18.19.121)(chokidar@4.0.3)(jiti@1.21.7)(karma@6.4.4)(less@4.4.0)(postcss@8.5.6)(terser@5.43.1)(tslib@2.8.1)(tsx@4.20.3)(typescript@5.9.2)(yaml@2.8.0)
+        version: 20.2.0-next.2(@angular/compiler-cli@packages+compiler-cli)(@angular/compiler@packages+compiler)(@angular/core@packages+core)(@angular/platform-browser@packages+platform-browser)(@angular/platform-server@packages+platform-server)(@angular/service-worker@packages+service-worker)(@angular/ssr@20.2.0-next.2(@angular/common@packages+common)(@angular/core@packages+core)(@angular/platform-server@packages+platform-server)(@angular/router@packages+router))(@types/node@18.19.121)(chokidar@4.0.3)(jiti@1.21.7)(karma@6.4.4)(less@4.4.0)(postcss@8.5.6)(terser@5.43.1)(tslib@2.8.1)(tsx@4.20.3)(typescript@5.9.2)(yaml@2.8.0)
       '@angular/cdk':
         specifier: 20.2.0-next.2
-        version: 20.2.0-next.2(rxjs@7.8.2)
+        version: 20.2.0-next.2(@angular/common@packages+common)(@angular/core@packages+core)(rxjs@7.8.2)
       '@angular/cli':
         specifier: 20.2.0-next.2
         version: 20.2.0-next.2(@types/node@18.19.121)(chokidar@4.0.3)
@@ -62,7 +60,7 @@ importers:
         version: link:packages/forms
       '@angular/material':
         specifier: 20.2.0-next.2
-        version: 20.2.0-next.2(@angular/cdk@20.2.0-next.2(rxjs@7.8.2))(rxjs@7.8.2)
+        version: 20.2.0-next.2(@angular/cdk@20.2.0-next.2(@angular/common@packages+common)(@angular/core@packages+core)(rxjs@7.8.2))(@angular/common@packages+common)(@angular/core@packages+core)(@angular/forms@packages+forms)(@angular/platform-browser@packages+platform-browser)(rxjs@7.8.2)
       '@angular/platform-browser':
         specifier: workspace:*
         version: link:packages/platform-browser
@@ -80,7 +78,7 @@ importers:
         version: link:packages/service-worker
       '@angular/ssr':
         specifier: 20.2.0-next.2
-        version: 20.2.0-next.2
+        version: 20.2.0-next.2(@angular/common@packages+common)(@angular/core@packages+core)(@angular/platform-server@packages+platform-server)(@angular/router@packages+router)
       '@babel/cli':
         specifier: 7.28.0
         version: 7.28.0(@babel/core@7.28.0)
@@ -203,7 +201,7 @@ importers:
         version: 7.9.0
       dagre-d3-es:
         specifier: ^7.0.11
-        version: 7.0.11(patch_hash=dp4f5qlzqey4wb2gylte6hyt4q)
+        version: 7.0.11(patch_hash=08ae1f30d46402ef53e1486454faa875683cf4152a8aab71ac255078ebfaccdd)
       diff:
         specifier: ^8.0.0
         version: 8.0.2
@@ -254,10 +252,10 @@ importers:
         version: 0.30.17
       ngx-flamegraph:
         specifier: 0.1.1
-        version: 0.1.1
+        version: 0.1.1(@angular/common@packages+common)(@angular/core@packages+core)
       ngx-progressbar:
         specifier: ^14.0.0
-        version: 14.0.0(@angular/cdk@20.2.0-next.2(rxjs@7.8.2))(rxjs@7.8.2)
+        version: 14.0.0(@angular/cdk@20.2.0-next.2(@angular/common@packages+common)(@angular/core@packages+core)(rxjs@7.8.2))(@angular/common@packages+common)(@angular/core@packages+core)(rxjs@7.8.2)
       open-in-idx:
         specifier: ^0.1.1
         version: 0.1.1
@@ -378,7 +376,7 @@ importers:
         version: 7.8.0(@types/node@18.19.121)
       '@nginfra/angular-linking':
         specifier: ^1.0.10
-        version: 1.0.10
+        version: 1.0.10(@angular/compiler-cli@packages+compiler-cli)
       '@octokit/graphql':
         specifier: ^9.0.0
         version: 9.0.1
@@ -411,7 +409,7 @@ importers:
         version: 0.5.16
       angular-split:
         specifier: ^20.0.0
-        version: 20.0.0(rxjs@7.8.2)
+        version: 20.0.0(@angular/common@packages+common)(@angular/core@packages+core)(rxjs@7.8.2)
       check-side-effects:
         specifier: 0.0.23
         version: 0.0.23
@@ -516,16 +514,16 @@ importers:
         version: 5.35.0
       '@angular-devkit/build-angular':
         specifier: 20.2.0-next.2
-        version: 20.2.0-next.2(@angular/ssr@20.2.0-next.2)(@types/node@24.1.0)(chokidar@4.0.3)(jiti@1.21.7)(karma@6.4.4)(protractor@7.0.0)(tsx@4.20.3)(typescript@5.9.2)(yaml@2.8.0)
+        version: 20.2.0-next.2(@angular/compiler-cli@packages+compiler-cli)(@angular/compiler@packages+compiler)(@angular/core@packages+core)(@angular/platform-browser@packages+platform-browser)(@angular/platform-server@packages+platform-server)(@angular/service-worker@packages+service-worker)(@angular/ssr@20.2.0-next.2(@angular/common@packages+common)(@angular/core@packages+core)(@angular/platform-server@packages+platform-server)(@angular/router@packages+router))(@types/node@24.1.0)(chokidar@4.0.3)(jiti@1.21.7)(karma@6.4.4)(protractor@7.0.0)(tsx@4.20.3)(typescript@5.9.2)(yaml@2.8.0)
       '@angular/animations':
         specifier: workspace:*
         version: link:../packages/animations
       '@angular/build':
         specifier: 20.2.0-next.2
-        version: 20.2.0-next.2(@angular/ssr@20.2.0-next.2)(@types/node@24.1.0)(chokidar@4.0.3)(jiti@1.21.7)(karma@6.4.4)(less@4.4.0)(postcss@8.5.6)(terser@5.43.1)(tslib@2.8.1)(tsx@4.20.3)(typescript@5.9.2)(yaml@2.8.0)
+        version: 20.2.0-next.2(@angular/compiler-cli@packages+compiler-cli)(@angular/compiler@packages+compiler)(@angular/core@packages+core)(@angular/localize@packages+localize)(@angular/platform-browser@packages+platform-browser)(@angular/platform-server@packages+platform-server)(@angular/service-worker@packages+service-worker)(@angular/ssr@20.2.0-next.2(@angular/common@packages+common)(@angular/core@packages+core)(@angular/platform-server@packages+platform-server)(@angular/router@packages+router))(@types/node@24.1.0)(chokidar@4.0.3)(jiti@1.21.7)(karma@6.4.4)(less@4.4.0)(postcss@8.5.6)(terser@5.43.1)(tslib@2.8.1)(tsx@4.20.3)(typescript@5.9.2)(yaml@2.8.0)
       '@angular/cdk':
         specifier: 20.2.0-next.2
-        version: 20.2.0-next.2(rxjs@7.8.2)
+        version: 20.2.0-next.2(@angular/common@packages+common)(@angular/core@packages+core)(rxjs@7.8.2)
       '@angular/cli':
         specifier: 20.2.0-next.2
         version: 20.2.0-next.2(@types/node@24.1.0)(chokidar@4.0.3)
@@ -549,7 +547,7 @@ importers:
         version: link:../packages/forms
       '@angular/material':
         specifier: 20.2.0-next.2
-        version: 20.2.0-next.2(@angular/cdk@20.2.0-next.2(rxjs@7.8.2))(rxjs@7.8.2)
+        version: 20.2.0-next.2(@angular/cdk@20.2.0-next.2(@angular/common@packages+common)(@angular/core@packages+core)(rxjs@7.8.2))(@angular/common@packages+common)(@angular/core@packages+core)(@angular/forms@packages+forms)(@angular/platform-browser@packages+platform-browser)(rxjs@7.8.2)
       '@angular/platform-browser':
         specifier: workspace:*
         version: link:../packages/platform-browser
@@ -561,7 +559,7 @@ importers:
         version: link:../packages/router
       '@angular/ssr':
         specifier: 20.2.0-next.2
-        version: 20.2.0-next.2
+        version: 20.2.0-next.2(@angular/common@packages+common)(@angular/core@packages+core)(@angular/platform-server@packages+platform-server)(@angular/router@packages+router)
       '@codemirror/autocomplete':
         specifier: 6.18.6
         version: 6.18.6
@@ -654,7 +652,7 @@ importers:
         version: 5.35.0
       angular-split:
         specifier: 20.0.0
-        version: 20.0.0(rxjs@7.8.2)
+        version: 20.0.0(@angular/common@packages+common)(@angular/core@packages+core)(rxjs@7.8.2)
       crelt:
         specifier: 1.0.6
         version: 1.0.6
@@ -696,7 +694,7 @@ importers:
         version: 11.9.0
       ngx-progressbar:
         specifier: 14.0.0
-        version: 14.0.0(@angular/cdk@20.2.0-next.2(rxjs@7.8.2))(rxjs@7.8.2)
+        version: 14.0.0(@angular/cdk@20.2.0-next.2(@angular/common@packages+common)(@angular/core@packages+core)(rxjs@7.8.2))(@angular/common@packages+common)(@angular/core@packages+core)(rxjs@7.8.2)
       open-in-idx:
         specifier: 0.1.1
         version: 0.1.1
@@ -742,21 +740,6 @@ importers:
 
   adev/shared-docs:
     dependencies:
-      '@angular/common':
-        specifier: 'workspace: *'
-        version: link:../../packages/common
-      '@angular/core':
-        specifier: 'workspace: *'
-        version: link:../../packages/core
-      '@angular/forms':
-        specifier: 'workspace: *'
-        version: link:../../packages/forms
-      '@angular/platform-browser':
-        specifier: 'workspace: *'
-        version: link:../../packages/platform-browser
-      '@angular/router':
-        specifier: 'workspace: *'
-        version: link:../../packages/router
       '@webcontainer/api':
         specifier: ^1.1.8
         version: 1.6.1
@@ -781,9 +764,6 @@ importers:
       mermaid:
         specifier: ^11.0.0
         version: 11.9.0
-      rxjs:
-        specifier: ^7.8.1
-        version: 7.8.2
       shiki:
         specifier: ^3.0.0
         version: 3.9.0
@@ -816,7 +796,7 @@ importers:
         version: link:../packages/benchpress
       '@angular/build':
         specifier: 20.2.0-next.2
-        version: 20.2.0-next.2(@angular/ssr@20.2.0-next.2)(@types/node@24.1.0)(chokidar@4.0.3)(jiti@1.21.7)(karma@6.4.4)(less@4.4.0)(postcss@8.5.6)(terser@5.43.1)(tslib@2.8.1)(tsx@4.20.3)(typescript@5.9.2)(yaml@2.8.0)
+        version: 20.2.0-next.2(@angular/compiler-cli@packages+compiler-cli)(@angular/compiler@packages+compiler)(@angular/core@packages+core)(@angular/localize@packages+localize)(@angular/platform-browser@packages+platform-browser)(@angular/platform-server@packages+platform-server)(@angular/service-worker@packages+service-worker)(@angular/ssr@20.2.0-next.2(@angular/common@packages+common)(@angular/core@packages+core)(@angular/platform-server@packages+platform-server)(@angular/router@packages+router))(@types/node@24.1.0)(chokidar@4.0.3)(jiti@1.21.7)(karma@6.4.4)(less@4.4.0)(postcss@8.5.6)(terser@5.43.1)(tslib@2.8.1)(tsx@4.20.3)(typescript@5.9.2)(yaml@2.8.0)
       '@angular/common':
         specifier: workspace:*
         version: link:../packages/common
@@ -886,12 +866,6 @@ importers:
 
   packages/animations:
     dependencies:
-      '@angular/common':
-        specifier: 'workspace: *'
-        version: link:../common
-      '@angular/core':
-        specifier: 'workspace: *'
-        version: link:../core
       tslib:
         specifier: ^2.3.0
         version: 2.8.1
@@ -900,19 +874,13 @@ importers:
     dependencies:
       '@angular/core':
         specifier: ^20.2.0-next
-        version: 20.2.0-next.3
+        version: 20.2.0-next.3(@angular/compiler@packages+compiler)(rxjs@7.8.2)(zone.js@0.15.1)
       reflect-metadata:
         specifier: ^0.2.0
         version: 0.2.2
 
   packages/common:
     dependencies:
-      '@angular/core':
-        specifier: 'workspace: *'
-        version: link:../core
-      rxjs:
-        specifier: ^6.5.3 || ^7.4.0
-        version: 7.8.2
       tslib:
         specifier: ^2.3.0
         version: 2.8.1
@@ -925,9 +893,6 @@ importers:
 
   packages/compiler-cli:
     dependencies:
-      '@angular/compiler':
-        specifier: 'workspace: *'
-        version: link:../compiler
       '@babel/core':
         specifier: 7.28.0
         version: 7.28.0
@@ -949,9 +914,6 @@ importers:
       tslib:
         specifier: ^2.3.0
         version: 2.8.1
-      typescript:
-        specifier: 5.9.0-beta
-        version: 5.9.0-beta
       yargs:
         specifier: ^18.0.0
         version: 18.0.0
@@ -967,18 +929,9 @@ importers:
 
   packages/core:
     dependencies:
-      '@angular/compiler':
-        specifier: 'workspace: *'
-        version: link:../compiler
-      rxjs:
-        specifier: ^6.5.3 || ^7.4.0
-        version: 7.8.2
       tslib:
         specifier: ^2.3.0
         version: 2.8.1
-      zone.js:
-        specifier: ~0.15.0
-        version: 0.15.1
 
   packages/core/test/bundling:
     dependencies:
@@ -987,7 +940,7 @@ importers:
         version: link:../../../animations
       '@angular/build':
         specifier: 20.2.0-next.2
-        version: 20.2.0-next.2(@angular/ssr@20.2.0-next.2)(@types/node@24.1.0)(chokidar@4.0.3)(jiti@1.21.7)(karma@6.4.4)(less@4.4.0)(postcss@8.5.6)(terser@5.43.1)(tslib@2.8.1)(tsx@4.20.3)(typescript@5.9.2)(yaml@2.8.0)
+        version: 20.2.0-next.2(@angular/compiler-cli@packages+compiler-cli)(@angular/compiler@packages+compiler)(@angular/core@packages+core)(@angular/localize@packages+localize)(@angular/platform-browser@packages+platform-browser)(@angular/platform-server@packages+platform-server)(@angular/service-worker@packages+service-worker)(@angular/ssr@20.2.0-next.2(@angular/common@packages+common)(@angular/core@packages+core)(@angular/platform-server@packages+platform-server)(@angular/router@packages+router))(@types/node@24.1.0)(chokidar@4.0.3)(jiti@1.21.7)(karma@6.4.4)(less@4.4.0)(postcss@8.5.6)(terser@5.43.1)(tslib@2.8.1)(tsx@4.20.3)(typescript@5.9.2)(yaml@2.8.0)
       '@angular/common':
         specifier: workspace:*
         version: link:../../../common
@@ -1006,42 +959,18 @@ importers:
 
   packages/elements:
     dependencies:
-      '@angular/core':
-        specifier: 'workspace: *'
-        version: link:../core
-      rxjs:
-        specifier: ^6.5.3 || ^7.4.0
-        version: 7.8.2
       tslib:
         specifier: ^2.3.0
         version: 2.8.1
 
   packages/forms:
     dependencies:
-      '@angular/common':
-        specifier: 'workspace: *'
-        version: link:../common
-      '@angular/core':
-        specifier: 'workspace: *'
-        version: link:../core
-      '@angular/platform-browser':
-        specifier: 'workspace: *'
-        version: link:../platform-browser
-      rxjs:
-        specifier: ^6.5.3 || ^7.4.0
-        version: 7.8.2
       tslib:
         specifier: ^2.3.0
         version: 2.8.1
 
   packages/localize:
     dependencies:
-      '@angular/compiler':
-        specifier: 'workspace: *'
-        version: link:../compiler
-      '@angular/compiler-cli':
-        specifier: 'workspace: *'
-        version: link:../compiler-cli
       '@babel/core':
         specifier: 7.28.0
         version: 7.28.0
@@ -1057,54 +986,18 @@ importers:
 
   packages/platform-browser:
     dependencies:
-      '@angular/animations':
-        specifier: 'workspace: *'
-        version: link:../animations
-      '@angular/common':
-        specifier: 'workspace: *'
-        version: link:../common
-      '@angular/core':
-        specifier: 'workspace: *'
-        version: link:../core
       tslib:
         specifier: ^2.3.0
         version: 2.8.1
 
   packages/platform-browser-dynamic:
     dependencies:
-      '@angular/common':
-        specifier: 'workspace: *'
-        version: link:../common
-      '@angular/compiler':
-        specifier: 'workspace: *'
-        version: link:../compiler
-      '@angular/core':
-        specifier: 'workspace: *'
-        version: link:../core
-      '@angular/platform-browser':
-        specifier: 'workspace: *'
-        version: link:../platform-browser
       tslib:
         specifier: ^2.3.0
         version: 2.8.1
 
   packages/platform-server:
     dependencies:
-      '@angular/common':
-        specifier: 'workspace: *'
-        version: link:../common
-      '@angular/compiler':
-        specifier: 'workspace: *'
-        version: link:../compiler
-      '@angular/core':
-        specifier: 'workspace: *'
-        version: link:../core
-      '@angular/platform-browser':
-        specifier: 'workspace: *'
-        version: link:../platform-browser
-      rxjs:
-        specifier: ^6.5.3 || ^7.4.0
-        version: 7.8.2
       tslib:
         specifier: ^2.3.0
         version: 2.8.1
@@ -1114,48 +1007,18 @@ importers:
 
   packages/router:
     dependencies:
-      '@angular/common':
-        specifier: 'workspace: *'
-        version: link:../common
-      '@angular/core':
-        specifier: 'workspace: *'
-        version: link:../core
-      '@angular/platform-browser':
-        specifier: 'workspace: *'
-        version: link:../platform-browser
-      rxjs:
-        specifier: ^6.5.3 || ^7.4.0
-        version: 7.8.2
       tslib:
         specifier: ^2.3.0
         version: 2.8.1
 
   packages/service-worker:
     dependencies:
-      '@angular/core':
-        specifier: 'workspace: *'
-        version: link:../core
-      rxjs:
-        specifier: ^6.5.3 || ^7.4.0
-        version: 7.8.2
       tslib:
         specifier: ^2.3.0
         version: 2.8.1
 
   packages/upgrade:
     dependencies:
-      '@angular/compiler':
-        specifier: 'workspace: *'
-        version: link:../compiler
-      '@angular/core':
-        specifier: 'workspace: *'
-        version: link:../core
-      '@angular/platform-browser':
-        specifier: 'workspace: *'
-        version: link:../platform-browser
-      '@angular/platform-browser-dynamic':
-        specifier: 'workspace: *'
-        version: link:../platform-browser-dynamic
       tslib:
         specifier: ^2.3.0
         version: 2.8.1
@@ -1308,6 +1171,12 @@ packages:
     resolution: {integrity: sha512-hO1lDH2S6guJdfyqAv6FpPi9C5GmP92i2ViZBnfW7sk2yI/5jUBp2pZ47HbVBCGOlFJKtyWFKYiNoxfnakhxXA==}
     engines: {node: ^20.19.0 || ^22.12.0 || >=24.0.0, npm: ^6.11.0 || ^7.5.6 || >=8.0.0, yarn: '>= 1.13.0'}
     peerDependencies:
+      '@angular/compiler-cli': ^20.0.0 || ^20.2.0-next.0
+      '@angular/core': ^20.0.0 || ^20.2.0-next.0
+      '@angular/localize': ^20.0.0 || ^20.2.0-next.0
+      '@angular/platform-browser': ^20.0.0 || ^20.2.0-next.0
+      '@angular/platform-server': ^20.0.0 || ^20.2.0-next.0
+      '@angular/service-worker': ^20.0.0 || ^20.2.0-next.0
       '@angular/ssr': ^20.2.0-next.2
       '@web/test-runner': ^0.20.0
       browser-sync: ^3.0.2
@@ -1319,6 +1188,16 @@ packages:
       tailwindcss: ^2.0.0 || ^3.0.0 || ^4.0.0
       typescript: '>=5.8 <6.0'
     peerDependenciesMeta:
+      '@angular/core':
+        optional: true
+      '@angular/localize':
+        optional: true
+      '@angular/platform-browser':
+        optional: true
+      '@angular/platform-server':
+        optional: true
+      '@angular/service-worker':
+        optional: true
       '@angular/ssr':
         optional: true
       '@web/test-runner':
@@ -1367,6 +1246,13 @@ packages:
     resolution: {integrity: sha512-2fW+hM+w0rAyNFXTNhaBEKLW0Ef367dKojSTftcI5hj3iNm/vdz4XVfL0WPD35XM7cKFivudw8XqeBN70n6YYw==}
     engines: {node: ^20.19.0 || ^22.12.0 || >=24.0.0, npm: ^6.11.0 || ^7.5.6 || >=8.0.0, yarn: '>= 1.13.0'}
     peerDependencies:
+      '@angular/compiler': ^20.0.0 || ^20.2.0-next.0
+      '@angular/compiler-cli': ^20.0.0 || ^20.2.0-next.0
+      '@angular/core': ^20.0.0 || ^20.2.0-next.0
+      '@angular/localize': ^20.0.0 || ^20.2.0-next.0
+      '@angular/platform-browser': ^20.0.0 || ^20.2.0-next.0
+      '@angular/platform-server': ^20.0.0 || ^20.2.0-next.0
+      '@angular/service-worker': ^20.0.0 || ^20.2.0-next.0
       '@angular/ssr': ^20.2.0-next.2
       karma: ^6.4.0
       less: ^4.2.0
@@ -1377,6 +1263,16 @@ packages:
       typescript: '>=5.8 <6.0'
       vitest: ^3.1.1
     peerDependenciesMeta:
+      '@angular/core':
+        optional: true
+      '@angular/localize':
+        optional: true
+      '@angular/platform-browser':
+        optional: true
+      '@angular/platform-server':
+        optional: true
+      '@angular/service-worker':
+        optional: true
       '@angular/ssr':
         optional: true
       karma:
@@ -1395,6 +1291,8 @@ packages:
   '@angular/cdk@20.2.0-next.2':
     resolution: {integrity: sha512-LXKouQ9D5wA/+u3v07VzKw/jxF4xXE+r1LWv40VkDix9JuQjdVefnZ+i9GWG4sWSwwQdio8+mVl1XgDIo6QNfw==}
     peerDependencies:
+      '@angular/common': ^20.0.0-0 || ^20.1.0-0 || ^20.2.0-0 || ^20.3.0-0 || ^21.0.0-0
+      '@angular/core': ^20.0.0-0 || ^20.1.0-0 || ^20.2.0-0 || ^20.3.0-0 || ^21.0.0-0
       rxjs: ^6.5.3 || ^7.4.0
 
   '@angular/cli@20.2.0-next.2':
@@ -1405,6 +1303,15 @@ packages:
   '@angular/core@20.2.0-next.3':
     resolution: {integrity: sha512-fqO+iEEYZV/rd6otIJ+/bjtVtn3SNucrdH/mH+7IbNDR+o677b4bqxlZUc31NkqDEX7gGzW0pDN1CpUENFOrMA==}
     engines: {node: ^20.19.0 || ^22.12.0 || >=24.0.0}
+    peerDependencies:
+      '@angular/compiler': 20.2.0-next.3
+      rxjs: ^6.5.3 || ^7.4.0
+      zone.js: ~0.15.0
+    peerDependenciesMeta:
+      '@angular/compiler':
+        optional: true
+      zone.js:
+        optional: true
 
   '@angular/domino@https://codeload.github.com/angular/domino/tar.gz/93e720f143d0296dd2726ffbcf4fc12283363a7b':
     resolution: {tarball: https://codeload.github.com/angular/domino/tar.gz/93e720f143d0296dd2726ffbcf4fc12283363a7b}
@@ -1414,6 +1321,10 @@ packages:
     resolution: {integrity: sha512-XKaEEhEPe75BscOlIB+QkaJucCxsbaFx1ul7cnHqdGizCZkT+pyRAoBSQ5Ql5TY2p6K+DV13o8YysJvaFGXkfA==}
     peerDependencies:
       '@angular/cdk': 20.2.0-next.2
+      '@angular/common': ^20.0.0-0 || ^20.1.0-0 || ^20.2.0-0 || ^20.3.0-0 || ^21.0.0-0
+      '@angular/core': ^20.0.0-0 || ^20.1.0-0 || ^20.2.0-0 || ^20.3.0-0 || ^21.0.0-0
+      '@angular/forms': ^20.0.0-0 || ^20.1.0-0 || ^20.2.0-0 || ^20.3.0-0 || ^21.0.0-0
+      '@angular/platform-browser': ^20.0.0-0 || ^20.1.0-0 || ^20.2.0-0 || ^20.3.0-0 || ^21.0.0-0
       rxjs: ^6.5.3 || ^7.4.0
 
   '@angular/ng-dev@https://codeload.github.com/angular/dev-infra-private-ng-dev-builds/tar.gz/ee016d9031a302c2dbcfa5d0ea7195ae7094290d':
@@ -1423,6 +1334,14 @@ packages:
 
   '@angular/ssr@20.2.0-next.2':
     resolution: {integrity: sha512-LhPYgL0YSXFNJ57jd5Uwab2pZNQSzVWH4xfSXEsti9ygr2rjJU5bAayAYpFpL0MCUbdkAaBkvmjQAa227tjnLA==}
+    peerDependencies:
+      '@angular/common': ^20.0.0 || ^20.2.0-next.0
+      '@angular/core': ^20.0.0 || ^20.2.0-next.0
+      '@angular/platform-server': ^20.0.0 || ^20.2.0-next.0
+      '@angular/router': ^20.0.0 || ^20.2.0-next.0
+    peerDependenciesMeta:
+      '@angular/platform-server':
+        optional: true
 
   '@antfu/install-pkg@1.1.0':
     resolution: {integrity: sha512-MGQsmw10ZyI+EJo45CdSER4zEb+p31LpDAFp2Z3gkSd1yqVZGi0Ebx++YTEMonJy4oChEMLsxZ64j8FH6sSqtQ==}
@@ -2803,11 +2722,14 @@ packages:
 
   '@nginfra/angular-linking@1.0.10':
     resolution: {integrity: sha512-31zx+PCN8tBlC0FYUuCxS4uVPJLAlBhi4UVp6QgoQG44RsOHKTmcRORMVSJdPLRgRuCJkY45kj+PE3AxsgiUKA==}
+    peerDependencies:
+      '@angular/compiler-cli': '*'
 
   '@ngtools/webpack@20.2.0-next.2':
     resolution: {integrity: sha512-4+XUy36rxQLANOJUpOs2x162YJaLJS60Y2zFTKjjvnu0pPHnWp8hh2lEKOV3fCI69Ujr7aWD3uw2ocMKJtxeFA==}
     engines: {node: ^20.19.0 || ^22.12.0 || >=24.0.0, npm: ^6.11.0 || ^7.5.6 || >=8.0.0, yarn: '>= 1.13.0'}
     peerDependencies:
+      '@angular/compiler-cli': ^20.0.0 || ^20.2.0-next.0
       typescript: '>=5.8 <6.0'
       webpack: ^5.54.0
 
@@ -4040,6 +3962,8 @@ packages:
   angular-split@20.0.0:
     resolution: {integrity: sha512-MtoR8NeFgzBDqiXaSbXPGFqpYsNsaI5W8w2mM/JpYyyU9hkrQ8b3GVhxraR/kGFGEDVmfEUGaqmy2yG0hraOHQ==}
     peerDependencies:
+      '@angular/common': '>=19.0.0'
+      '@angular/core': '>=19.0.0'
       rxjs: '>=7.0.0'
 
   angular@1.5.11:
@@ -7998,11 +7922,16 @@ packages:
 
   ngx-flamegraph@0.1.1:
     resolution: {integrity: sha512-BTyyOnPDXW0Xi5iOd+H03atdiCNdnYNzpkNJ4iqTrkYGJnOnzaMEzdlaN9Jt3Qpjcs3oyvUoJvD85xZnZpzTyQ==}
+    peerDependencies:
+      '@angular/common': ^20.0.0
+      '@angular/core': ^20.0.0
 
   ngx-progressbar@14.0.0:
     resolution: {integrity: sha512-tDj7h5F2aSI4/XaJjs50FnELVe6qFqyz3vVq22acacd3oDW2EyJB4c+IYaxMf5972OdTw0WL4n6UwQ3dqC+gCA==}
     peerDependencies:
       '@angular/cdk': '>=17.3.0'
+      '@angular/common': '>=17.3.0'
+      '@angular/core': '>=17.3.0'
       rxjs: '>=7.0.0'
 
   no-case@3.0.4:
@@ -10109,11 +10038,6 @@ packages:
     engines: {node: '>=14.17'}
     hasBin: true
 
-  typescript@5.9.0-beta:
-    resolution: {integrity: sha512-p91qoTdwWKj9YEBYavmGiBn0DF4OBElzw4pW4oPbK4HeCfr/SDz9+yviVWshZXGvGvFCJ3AVQ+J7F1UZXc23QQ==}
-    engines: {node: '>=14.17'}
-    hasBin: true
-
   typescript@5.9.2:
     resolution: {integrity: sha512-CWBzXQrc/qOkhidw1OzBTQuYRbfyxDXJMVJ1XNwUHGROVmuaeiEm3OslpZ1RV96d7SKKjZKrSJu3+t/xlw3R9A==}
     engines: {node: '>=14.17'}
@@ -11043,19 +10967,14 @@ snapshots:
     transitivePeerDependencies:
       - chokidar
 
-  '@angular-devkit/build-angular@20.2.0-next.2(@angular/ssr@20.2.0-next.2)(@types/node@18.19.121)(chokidar@4.0.3)(jiti@1.21.7)(karma@6.4.4)(protractor@7.0.0)(tsx@4.20.3)(typescript@5.9.2)(yaml@2.8.0)':
+  '@angular-devkit/build-angular@20.2.0-next.2(@angular/compiler-cli@packages+compiler-cli)(@angular/compiler@packages+compiler)(@angular/core@packages+core)(@angular/platform-browser@packages+platform-browser)(@angular/platform-server@packages+platform-server)(@angular/service-worker@packages+service-worker)(@angular/ssr@20.2.0-next.2(@angular/common@packages+common)(@angular/core@packages+core)(@angular/platform-server@packages+platform-server)(@angular/router@packages+router))(@types/node@18.19.121)(chokidar@4.0.3)(jiti@1.21.7)(karma@6.4.4)(protractor@7.0.0)(tsx@4.20.3)(typescript@5.9.2)(yaml@2.8.0)':
     dependencies:
       '@ampproject/remapping': 2.3.0
       '@angular-devkit/architect': 0.2002.0-next.2(chokidar@4.0.3)
       '@angular-devkit/build-webpack': 0.2002.0-next.2(chokidar@4.0.3)(webpack-dev-server@5.2.2(webpack@5.100.2(esbuild@0.25.8)))(webpack@5.100.2(esbuild@0.25.8))
       '@angular-devkit/core': 20.2.0-next.2(chokidar@4.0.3)
-      '@angular/build': 20.2.0-next.2(@angular/ssr@20.2.0-next.2)(@types/node@18.19.121)(chokidar@4.0.3)(jiti@1.21.7)(karma@6.4.4)(less@4.4.0)(postcss@8.5.6)(terser@5.43.1)(tslib@2.8.1)(tsx@4.20.3)(typescript@5.9.2)(yaml@2.8.0)
+      '@angular/build': 20.2.0-next.2(@angular/compiler-cli@packages+compiler-cli)(@angular/compiler@packages+compiler)(@angular/core@packages+core)(@angular/platform-browser@packages+platform-browser)(@angular/platform-server@packages+platform-server)(@angular/service-worker@packages+service-worker)(@angular/ssr@20.2.0-next.2(@angular/common@packages+common)(@angular/core@packages+core)(@angular/platform-server@packages+platform-server)(@angular/router@packages+router))(@types/node@18.19.121)(chokidar@4.0.3)(jiti@1.21.7)(karma@6.4.4)(less@4.4.0)(postcss@8.5.6)(terser@5.43.1)(tslib@2.8.1)(tsx@4.20.3)(typescript@5.9.2)(yaml@2.8.0)
       '@angular/compiler-cli': link:packages/compiler-cli
-      '@angular/core': link:packages/core
-      '@angular/localize': link:packages/localize
-      '@angular/platform-browser': link:packages/platform-browser
-      '@angular/platform-server': link:packages/platform-server
-      '@angular/service-worker': link:packages/service-worker
       '@babel/core': 7.28.0
       '@babel/generator': 7.28.0
       '@babel/helper-annotate-as-pure': 7.27.3
@@ -11066,7 +10985,7 @@ snapshots:
       '@babel/preset-env': 7.28.0(@babel/core@7.28.0)
       '@babel/runtime': 7.28.2
       '@discoveryjs/json-ext': 0.6.3
-      '@ngtools/webpack': 20.2.0-next.2(typescript@5.9.2)(webpack@5.100.2(esbuild@0.25.8))
+      '@ngtools/webpack': 20.2.0-next.2(@angular/compiler-cli@packages+compiler-cli)(typescript@5.9.2)(webpack@5.100.2(esbuild@0.25.8))
       ansi-colors: 4.1.3
       autoprefixer: 10.4.21(postcss@8.5.6)
       babel-loader: 10.0.0(@babel/core@7.28.0)(webpack@5.100.2(esbuild@0.25.8))
@@ -11107,11 +11026,16 @@ snapshots:
       webpack-merge: 6.0.1
       webpack-subresource-integrity: 5.1.0(webpack@5.100.2(esbuild@0.25.8))
     optionalDependencies:
-      '@angular/ssr': 20.2.0-next.2
+      '@angular/core': link:packages/core
+      '@angular/platform-browser': link:packages/platform-browser
+      '@angular/platform-server': link:packages/platform-server
+      '@angular/service-worker': link:packages/service-worker
+      '@angular/ssr': 20.2.0-next.2(@angular/common@packages+common)(@angular/core@packages+core)(@angular/platform-server@packages+platform-server)(@angular/router@packages+router)
       esbuild: 0.25.8
       karma: 6.4.4
       protractor: 7.0.0
     transitivePeerDependencies:
+      - '@angular/compiler'
       - '@rspack/core'
       - '@swc/core'
       - '@types/node'
@@ -11133,19 +11057,14 @@ snapshots:
       - webpack-cli
       - yaml
 
-  '@angular-devkit/build-angular@20.2.0-next.2(@angular/ssr@20.2.0-next.2)(@types/node@24.1.0)(chokidar@4.0.3)(jiti@1.21.7)(karma@6.4.4)(protractor@7.0.0)(tsx@4.20.3)(typescript@5.9.2)(yaml@2.8.0)':
+  '@angular-devkit/build-angular@20.2.0-next.2(@angular/compiler-cli@packages+compiler-cli)(@angular/compiler@packages+compiler)(@angular/core@packages+core)(@angular/platform-browser@packages+platform-browser)(@angular/platform-server@packages+platform-server)(@angular/service-worker@packages+service-worker)(@angular/ssr@20.2.0-next.2(@angular/common@packages+common)(@angular/core@packages+core)(@angular/platform-server@packages+platform-server)(@angular/router@packages+router))(@types/node@24.1.0)(chokidar@4.0.3)(jiti@1.21.7)(karma@6.4.4)(protractor@7.0.0)(tsx@4.20.3)(typescript@5.9.2)(yaml@2.8.0)':
     dependencies:
       '@ampproject/remapping': 2.3.0
       '@angular-devkit/architect': 0.2002.0-next.2(chokidar@4.0.3)
       '@angular-devkit/build-webpack': 0.2002.0-next.2(chokidar@4.0.3)(webpack-dev-server@5.2.2(webpack@5.100.2(esbuild@0.25.8)))(webpack@5.100.2(esbuild@0.25.8))
       '@angular-devkit/core': 20.2.0-next.2(chokidar@4.0.3)
-      '@angular/build': 20.2.0-next.2(@angular/ssr@20.2.0-next.2)(@types/node@24.1.0)(chokidar@4.0.3)(jiti@1.21.7)(karma@6.4.4)(less@4.4.0)(postcss@8.5.6)(terser@5.43.1)(tslib@2.8.1)(tsx@4.20.3)(typescript@5.9.2)(yaml@2.8.0)
+      '@angular/build': 20.2.0-next.2(@angular/compiler-cli@packages+compiler-cli)(@angular/compiler@packages+compiler)(@angular/core@packages+core)(@angular/localize@packages+localize)(@angular/platform-browser@packages+platform-browser)(@angular/platform-server@packages+platform-server)(@angular/service-worker@packages+service-worker)(@angular/ssr@20.2.0-next.2(@angular/common@packages+common)(@angular/core@packages+core)(@angular/platform-server@packages+platform-server)(@angular/router@packages+router))(@types/node@24.1.0)(chokidar@4.0.3)(jiti@1.21.7)(karma@6.4.4)(less@4.4.0)(postcss@8.5.6)(terser@5.43.1)(tslib@2.8.1)(tsx@4.20.3)(typescript@5.9.2)(yaml@2.8.0)
       '@angular/compiler-cli': link:packages/compiler-cli
-      '@angular/core': link:packages/core
-      '@angular/localize': link:packages/localize
-      '@angular/platform-browser': link:packages/platform-browser
-      '@angular/platform-server': link:packages/platform-server
-      '@angular/service-worker': link:packages/service-worker
       '@babel/core': 7.28.0
       '@babel/generator': 7.28.0
       '@babel/helper-annotate-as-pure': 7.27.3
@@ -11156,7 +11075,7 @@ snapshots:
       '@babel/preset-env': 7.28.0(@babel/core@7.28.0)
       '@babel/runtime': 7.28.2
       '@discoveryjs/json-ext': 0.6.3
-      '@ngtools/webpack': 20.2.0-next.2(typescript@5.9.2)(webpack@5.100.2(esbuild@0.25.8))
+      '@ngtools/webpack': 20.2.0-next.2(@angular/compiler-cli@packages+compiler-cli)(typescript@5.9.2)(webpack@5.100.2(esbuild@0.25.8))
       ansi-colors: 4.1.3
       autoprefixer: 10.4.21(postcss@8.5.6)
       babel-loader: 10.0.0(@babel/core@7.28.0)(webpack@5.100.2(esbuild@0.25.8))
@@ -11197,11 +11116,16 @@ snapshots:
       webpack-merge: 6.0.1
       webpack-subresource-integrity: 5.1.0(webpack@5.100.2(esbuild@0.25.8))
     optionalDependencies:
-      '@angular/ssr': 20.2.0-next.2
+      '@angular/core': link:packages/core
+      '@angular/platform-browser': link:packages/platform-browser
+      '@angular/platform-server': link:packages/platform-server
+      '@angular/service-worker': link:packages/service-worker
+      '@angular/ssr': 20.2.0-next.2(@angular/common@packages+common)(@angular/core@packages+core)(@angular/platform-server@packages+platform-server)(@angular/router@packages+router)
       esbuild: 0.25.8
       karma: 6.4.4
       protractor: 7.0.0
     transitivePeerDependencies:
+      - '@angular/compiler'
       - '@rspack/core'
       - '@swc/core'
       - '@types/node'
@@ -11260,73 +11184,12 @@ snapshots:
     transitivePeerDependencies:
       - chokidar
 
-  '@angular/build@20.2.0-next.2(@angular/ssr@20.2.0-next.2)(@types/node@18.19.121)(chokidar@4.0.3)(jiti@1.21.7)(karma@6.4.4)(less@4.4.0)(postcss@8.5.6)(terser@5.43.1)(tslib@2.8.1)(tsx@4.20.3)(typescript@5.9.2)(yaml@2.8.0)':
+  '@angular/build@20.2.0-next.2(@angular/compiler-cli@packages+compiler-cli)(@angular/compiler@packages+compiler)(@angular/core@packages+core)(@angular/localize@packages+localize)(@angular/platform-browser@packages+platform-browser)(@angular/platform-server@packages+platform-server)(@angular/service-worker@packages+service-worker)(@angular/ssr@20.2.0-next.2(@angular/common@packages+common)(@angular/core@packages+core)(@angular/platform-server@packages+platform-server)(@angular/router@packages+router))(@types/node@24.1.0)(chokidar@4.0.3)(jiti@1.21.7)(karma@6.4.4)(less@4.4.0)(postcss@8.5.6)(terser@5.43.1)(tslib@2.8.1)(tsx@4.20.3)(typescript@5.9.2)(yaml@2.8.0)':
     dependencies:
       '@ampproject/remapping': 2.3.0
       '@angular-devkit/architect': 0.2002.0-next.2(chokidar@4.0.3)
       '@angular/compiler': link:packages/compiler
       '@angular/compiler-cli': link:packages/compiler-cli
-      '@angular/core': link:packages/core
-      '@angular/localize': link:packages/localize
-      '@angular/platform-browser': link:packages/platform-browser
-      '@angular/platform-server': link:packages/platform-server
-      '@angular/service-worker': link:packages/service-worker
-      '@babel/core': 7.28.0
-      '@babel/helper-annotate-as-pure': 7.27.3
-      '@babel/helper-split-export-declaration': 7.24.7
-      '@inquirer/confirm': 5.1.14(@types/node@18.19.121)
-      '@vitejs/plugin-basic-ssl': 2.1.0(vite@7.0.6(@types/node@18.19.121)(jiti@1.21.7)(less@4.4.0)(sass@1.89.2)(terser@5.43.1)(tsx@4.20.3)(yaml@2.8.0))
-      beasties: 0.3.5
-      browserslist: 4.25.1
-      esbuild: 0.25.8
-      https-proxy-agent: 7.0.6
-      istanbul-lib-instrument: 6.0.3
-      jsonc-parser: 3.3.1
-      listr2: 9.0.1
-      magic-string: 0.30.17
-      mrmime: 2.0.1
-      parse5-html-rewriting-stream: 8.0.0
-      picomatch: 4.0.3
-      piscina: 5.1.3
-      rolldown: 1.0.0-beta.29
-      sass: 1.89.2
-      semver: 7.7.2
-      source-map-support: 0.5.21
-      tinyglobby: 0.2.14
-      tslib: 2.8.1
-      typescript: 5.9.2
-      vite: 7.0.6(@types/node@18.19.121)(jiti@1.21.7)(less@4.4.0)(sass@1.89.2)(terser@5.43.1)(tsx@4.20.3)(yaml@2.8.0)
-      watchpack: 2.4.4
-    optionalDependencies:
-      '@angular/ssr': 20.2.0-next.2
-      karma: 6.4.4
-      less: 4.4.0
-      lmdb: 3.4.1
-      postcss: 8.5.6
-    transitivePeerDependencies:
-      - '@types/node'
-      - chokidar
-      - jiti
-      - lightningcss
-      - sass-embedded
-      - stylus
-      - sugarss
-      - supports-color
-      - terser
-      - tsx
-      - yaml
-
-  '@angular/build@20.2.0-next.2(@angular/ssr@20.2.0-next.2)(@types/node@24.1.0)(chokidar@4.0.3)(jiti@1.21.7)(karma@6.4.4)(less@4.4.0)(postcss@8.5.6)(terser@5.43.1)(tslib@2.8.1)(tsx@4.20.3)(typescript@5.9.2)(yaml@2.8.0)':
-    dependencies:
-      '@ampproject/remapping': 2.3.0
-      '@angular-devkit/architect': 0.2002.0-next.2(chokidar@4.0.3)
-      '@angular/compiler': link:packages/compiler
-      '@angular/compiler-cli': link:packages/compiler-cli
-      '@angular/core': link:packages/core
-      '@angular/localize': link:packages/localize
-      '@angular/platform-browser': link:packages/platform-browser
-      '@angular/platform-server': link:packages/platform-server
-      '@angular/service-worker': link:packages/service-worker
       '@babel/core': 7.28.0
       '@babel/helper-annotate-as-pure': 7.27.3
       '@babel/helper-split-export-declaration': 7.24.7
@@ -11354,7 +11217,12 @@ snapshots:
       vite: 7.0.6(@types/node@24.1.0)(jiti@1.21.7)(less@4.4.0)(sass@1.89.2)(terser@5.43.1)(tsx@4.20.3)(yaml@2.8.0)
       watchpack: 2.4.4
     optionalDependencies:
-      '@angular/ssr': 20.2.0-next.2
+      '@angular/core': link:packages/core
+      '@angular/localize': link:packages/localize
+      '@angular/platform-browser': link:packages/platform-browser
+      '@angular/platform-server': link:packages/platform-server
+      '@angular/service-worker': link:packages/service-worker
+      '@angular/ssr': 20.2.0-next.2(@angular/common@packages+common)(@angular/core@packages+core)(@angular/platform-server@packages+platform-server)(@angular/router@packages+router)
       karma: 6.4.4
       less: 4.4.0
       lmdb: 3.4.1
@@ -11372,7 +11240,62 @@ snapshots:
       - tsx
       - yaml
 
-  '@angular/cdk@20.2.0-next.2(rxjs@7.8.2)':
+  '@angular/build@20.2.0-next.2(@angular/compiler-cli@packages+compiler-cli)(@angular/compiler@packages+compiler)(@angular/core@packages+core)(@angular/platform-browser@packages+platform-browser)(@angular/platform-server@packages+platform-server)(@angular/service-worker@packages+service-worker)(@angular/ssr@20.2.0-next.2(@angular/common@packages+common)(@angular/core@packages+core)(@angular/platform-server@packages+platform-server)(@angular/router@packages+router))(@types/node@18.19.121)(chokidar@4.0.3)(jiti@1.21.7)(karma@6.4.4)(less@4.4.0)(postcss@8.5.6)(terser@5.43.1)(tslib@2.8.1)(tsx@4.20.3)(typescript@5.9.2)(yaml@2.8.0)':
+    dependencies:
+      '@ampproject/remapping': 2.3.0
+      '@angular-devkit/architect': 0.2002.0-next.2(chokidar@4.0.3)
+      '@angular/compiler': link:packages/compiler
+      '@angular/compiler-cli': link:packages/compiler-cli
+      '@babel/core': 7.28.0
+      '@babel/helper-annotate-as-pure': 7.27.3
+      '@babel/helper-split-export-declaration': 7.24.7
+      '@inquirer/confirm': 5.1.14(@types/node@18.19.121)
+      '@vitejs/plugin-basic-ssl': 2.1.0(vite@7.0.6(@types/node@18.19.121)(jiti@1.21.7)(less@4.4.0)(sass@1.89.2)(terser@5.43.1)(tsx@4.20.3)(yaml@2.8.0))
+      beasties: 0.3.5
+      browserslist: 4.25.1
+      esbuild: 0.25.8
+      https-proxy-agent: 7.0.6
+      istanbul-lib-instrument: 6.0.3
+      jsonc-parser: 3.3.1
+      listr2: 9.0.1
+      magic-string: 0.30.17
+      mrmime: 2.0.1
+      parse5-html-rewriting-stream: 8.0.0
+      picomatch: 4.0.3
+      piscina: 5.1.3
+      rolldown: 1.0.0-beta.29
+      sass: 1.89.2
+      semver: 7.7.2
+      source-map-support: 0.5.21
+      tinyglobby: 0.2.14
+      tslib: 2.8.1
+      typescript: 5.9.2
+      vite: 7.0.6(@types/node@18.19.121)(jiti@1.21.7)(less@4.4.0)(sass@1.89.2)(terser@5.43.1)(tsx@4.20.3)(yaml@2.8.0)
+      watchpack: 2.4.4
+    optionalDependencies:
+      '@angular/core': link:packages/core
+      '@angular/platform-browser': link:packages/platform-browser
+      '@angular/platform-server': link:packages/platform-server
+      '@angular/service-worker': link:packages/service-worker
+      '@angular/ssr': 20.2.0-next.2(@angular/common@packages+common)(@angular/core@packages+core)(@angular/platform-server@packages+platform-server)(@angular/router@packages+router)
+      karma: 6.4.4
+      less: 4.4.0
+      lmdb: 3.4.1
+      postcss: 8.5.6
+    transitivePeerDependencies:
+      - '@types/node'
+      - chokidar
+      - jiti
+      - lightningcss
+      - sass-embedded
+      - stylus
+      - sugarss
+      - supports-color
+      - terser
+      - tsx
+      - yaml
+
+  '@angular/cdk@20.2.0-next.2(@angular/common@packages+common)(@angular/core@packages+core)(rxjs@7.8.2)':
     dependencies:
       '@angular/common': link:packages/common
       '@angular/core': link:packages/core
@@ -11430,18 +11353,19 @@ snapshots:
       - chokidar
       - supports-color
 
-  '@angular/core@20.2.0-next.3':
+  '@angular/core@20.2.0-next.3(@angular/compiler@packages+compiler)(rxjs@7.8.2)(zone.js@0.15.1)':
     dependencies:
-      '@angular/compiler': link:packages/compiler
       rxjs: 7.8.2
       tslib: 2.8.1
+    optionalDependencies:
+      '@angular/compiler': link:packages/compiler
       zone.js: 0.15.1
 
   '@angular/domino@https://codeload.github.com/angular/domino/tar.gz/93e720f143d0296dd2726ffbcf4fc12283363a7b': {}
 
-  '@angular/material@20.2.0-next.2(@angular/cdk@20.2.0-next.2(rxjs@7.8.2))(rxjs@7.8.2)':
+  '@angular/material@20.2.0-next.2(@angular/cdk@20.2.0-next.2(@angular/common@packages+common)(@angular/core@packages+core)(rxjs@7.8.2))(@angular/common@packages+common)(@angular/core@packages+core)(@angular/forms@packages+forms)(@angular/platform-browser@packages+platform-browser)(rxjs@7.8.2)':
     dependencies:
-      '@angular/cdk': 20.2.0-next.2(rxjs@7.8.2)
+      '@angular/cdk': 20.2.0-next.2(@angular/common@packages+common)(@angular/core@packages+core)(rxjs@7.8.2)
       '@angular/common': link:packages/common
       '@angular/core': link:packages/core
       '@angular/forms': link:packages/forms
@@ -11470,13 +11394,14 @@ snapshots:
       - encoding
       - utf-8-validate
 
-  '@angular/ssr@20.2.0-next.2':
+  '@angular/ssr@20.2.0-next.2(@angular/common@packages+common)(@angular/core@packages+core)(@angular/platform-server@packages+platform-server)(@angular/router@packages+router)':
     dependencies:
       '@angular/common': link:packages/common
       '@angular/core': link:packages/core
-      '@angular/platform-server': link:packages/platform-server
       '@angular/router': link:packages/router
       tslib: 2.8.1
+    optionalDependencies:
+      '@angular/platform-server': link:packages/platform-server
 
   '@antfu/install-pkg@1.1.0':
     dependencies:
@@ -13226,7 +13151,7 @@ snapshots:
       '@tybys/wasm-util': 0.10.0
     optional: true
 
-  '@nginfra/angular-linking@1.0.10':
+  '@nginfra/angular-linking@1.0.10(@angular/compiler-cli@packages+compiler-cli)':
     dependencies:
       '@angular/compiler-cli': link:packages/compiler-cli
       '@babel/core': 7.26.10
@@ -13237,7 +13162,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@ngtools/webpack@20.2.0-next.2(typescript@5.9.2)(webpack@5.100.2(esbuild@0.25.8))':
+  '@ngtools/webpack@20.2.0-next.2(@angular/compiler-cli@packages+compiler-cli)(typescript@5.9.2)(webpack@5.100.2(esbuild@0.25.8))':
     dependencies:
       '@angular/compiler-cli': link:packages/compiler-cli
       typescript: 5.9.2
@@ -14565,7 +14490,7 @@ snapshots:
 
   angular-mocks@1.8.3: {}
 
-  angular-split@20.0.0(rxjs@7.8.2):
+  angular-split@20.0.0(@angular/common@packages+common)(@angular/core@packages+core)(rxjs@7.8.2):
     dependencies:
       '@angular/common': link:packages/common
       '@angular/core': link:packages/core
@@ -16038,7 +15963,7 @@ snapshots:
       d3-transition: 3.0.1(d3-selection@3.0.0)
       d3-zoom: 3.0.0
 
-  dagre-d3-es@7.0.11(patch_hash=dp4f5qlzqey4wb2gylte6hyt4q):
+  dagre-d3-es@7.0.11(patch_hash=08ae1f30d46402ef53e1486454faa875683cf4152a8aab71ac255078ebfaccdd):
     dependencies:
       d3: 7.9.0
       lodash-es: 4.17.21
@@ -19096,7 +19021,7 @@ snapshots:
       cytoscape-fcose: 2.2.0(cytoscape@3.33.0)
       d3: 7.9.0
       d3-sankey: 0.12.3
-      dagre-d3-es: 7.0.11(patch_hash=dp4f5qlzqey4wb2gylte6hyt4q)
+      dagre-d3-es: 7.0.11(patch_hash=08ae1f30d46402ef53e1486454faa875683cf4152a8aab71ac255078ebfaccdd)
       dayjs: 1.11.13
       dompurify: 3.2.6
       katex: 0.16.22
@@ -19371,15 +19296,15 @@ snapshots:
 
   netmask@2.0.2: {}
 
-  ngx-flamegraph@0.1.1:
+  ngx-flamegraph@0.1.1(@angular/common@packages+common)(@angular/core@packages+core):
     dependencies:
       '@angular/common': link:packages/common
       '@angular/core': link:packages/core
       tslib: 2.8.1
 
-  ngx-progressbar@14.0.0(@angular/cdk@20.2.0-next.2(rxjs@7.8.2))(rxjs@7.8.2):
+  ngx-progressbar@14.0.0(@angular/cdk@20.2.0-next.2(@angular/common@packages+common)(@angular/core@packages+core)(rxjs@7.8.2))(@angular/common@packages+common)(@angular/core@packages+core)(rxjs@7.8.2):
     dependencies:
-      '@angular/cdk': 20.2.0-next.2(rxjs@7.8.2)
+      '@angular/cdk': 20.2.0-next.2(@angular/common@packages+common)(@angular/core@packages+core)(rxjs@7.8.2)
       '@angular/common': link:packages/common
       '@angular/core': link:packages/core
       rxjs: 7.8.2
@@ -21899,8 +21824,6 @@ snapshots:
   typescript@4.9.5: {}
 
   typescript@5.8.2: {}
-
-  typescript@5.9.0-beta: {}
 
   typescript@5.9.2: {}
 
