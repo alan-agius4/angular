@@ -8,8 +8,8 @@ load("//:yarn.bzl", "YARN_LABEL")
 
 http_archive(
     name = "build_bazel_rules_nodejs",
-    sha256 = "5dd1e5dea1322174c57d3ca7b899da381d516220793d0adef3ba03b9d23baa8e",
-    urls = ["https://github.com/bazelbuild/rules_nodejs/releases/download/5.8.3/rules_nodejs-5.8.3.tar.gz"],
+    sha256 = "a1295b168f183218bc88117cf00674bcd102498f294086ff58318f830dd9d9d1",
+    urls = ["https://github.com/bazelbuild/rules_nodejs/releases/download/5.8.5/rules_nodejs-5.8.5.tar.gz"],
 )
 
 load("@build_bazel_rules_nodejs//:repositories.bzl", "build_bazel_rules_nodejs_dependencies")
@@ -31,9 +31,9 @@ http_archive(
 
 http_archive(
     name = "aspect_rules_js",
-    sha256 = "304c51726b727d53277dd28fcda1b8e43b7e46818530b8d6265e7be98d5e2b25",
-    strip_prefix = "rules_js-2.3.8",
-    url = "https://github.com/aspect-build/rules_js/releases/download/v2.3.8/rules_js-v2.3.8.tar.gz",
+    sha256 = "17c5964f6a4507488c2ce99ebd493ee111da5d5cab85ca99119eaae331d38989",
+    strip_prefix = "rules_js-2.5.0",
+    url = "https://github.com/aspect-build/rules_js/releases/download/v2.5.0/rules_js-v2.5.0.tar.gz",
 )
 
 load("@aspect_rules_js//js:repositories.bzl", "rules_js_dependencies")
@@ -113,9 +113,9 @@ npm_repositories()
 
 http_archive(
     name = "aspect_rules_ts",
-    sha256 = "09af62a0d46918d815b5f48b5ed0f5349b62c15fc42fcc3fef5c246504ff8d99",
-    strip_prefix = "rules_ts-3.6.3",
-    url = "https://github.com/aspect-build/rules_ts/releases/download/v3.6.3/rules_ts-v3.6.3.tar.gz",
+    sha256 = "6fd16aa24c2e8547b72561ece1c7d307b77a5f98f0402934396f6eefbac59aa2",
+    strip_prefix = "rules_ts-3.7.0",
+    url = "https://github.com/aspect-build/rules_ts/releases/download/v3.7.0/rules_ts-v3.7.0.tar.gz",
 )
 
 load("@aspect_rules_ts//ts:repositories.bzl", "rules_ts_dependencies")
@@ -151,8 +151,8 @@ aspect_bazel_lib_dependencies()
 # TODO: Remove when karma webtest is no longer used
 http_archive(
     name = "io_bazel_rules_webtesting",
-    sha256 = "e9abb7658b6a129740c0b3ef6f5a2370864e102a5ba5ffca2cea565829ed825a",
-    urls = ["https://github.com/bazelbuild/rules_webtesting/releases/download/0.3.5/rules_webtesting.tar.gz"],
+    sha256 = "574f1c0aa072c187194d60beda7f5be15e139a5e0096089a7710818eec3a4f62",
+    urls = ["https://github.com/bazelbuild/rules_webtesting/releases/download/0.4.1/rules_webtesting-0.4.1.tar.gz"],
 )
 
 # Setup the rules_webtesting toolchain
@@ -236,7 +236,7 @@ browser_repositories()
 
 git_repository(
     name = "rules_angular",
-    commit = "8bf9ae3fa3017ec12877908533001daed9c6ce83",
+    commit = "17eac47ea99057f7473a7d93292e76327c894ed9",
     remote = "https://github.com/devversion/rules_angular.git",
 )
 
@@ -257,7 +257,7 @@ rules_angular_step3(
 
 git_repository(
     name = "rules_browsers",
-    commit = "56ef8007ea07cd1916429bca8bb523433b0e9cdc",
+    commit = "8ee9ae3216ef26516c8ef20537c89857343cdc3a",
     remote = "https://github.com/devversion/rules_browsers.git",
 )
 
@@ -297,7 +297,7 @@ register_toolchains(
 
 git_repository(
     name = "rules_sass",
-    commit = "cc1e845339fc45d3c8390445014d5824b85a0948",
+    commit = "76078d5e9776a0080dcee496e90b88d8a6179c19",
     remote = "https://github.com/devversion/rules_sass.git",
 )
 
@@ -307,7 +307,7 @@ setup_rules_sass()
 
 http_archive(
     name = "jq.bzl",
-    sha256 = "7b63435aa19cc6a0cfd1a82fbdf2c7a2f0a94db1a79ff7a4469ffa94286261ab",
-    strip_prefix = "jq.bzl-0.1.0",
-    url = "https://github.com/bazel-contrib/jq.bzl/releases/download/v0.1.0/jq.bzl-v0.1.0.tar.gz",
+    sha256 = "6dd9eeb5a53bbe5e116cd679c65e3caa9917af83d05f318539dbb46d417b0b28",
+    strip_prefix = "jq.bzl-0.2.2",
+    url = "https://github.com/bazel-contrib/jq.bzl/releases/download/v0.2.2/jq.bzl-v0.2.2.tar.gz",
 )
