@@ -28,9 +28,9 @@ export async function copyJsonAssets({repo, githubApi, assetsPath, destPath}) {
   );
 
   let downstreamBranch;
-  let latestSha;
+  let latestShaFromBranch;
   try {
-    latestSha = await githubApi.getShaForBranch(currentBranch);
+    latestShaFromBranch = await githubApi.getShaForBranch(currentBranch);
     downstreamBranch = currentBranch;
   } catch (e) {
     // In some cases, such as when a new branch is created for a feature,
@@ -38,21 +38,21 @@ export async function copyJsonAssets({repo, githubApi, assetsPath, destPath}) {
     // exceptional minor release (e.g. FW 20.3.x and Components: 20.2.x).
     // In such scenarios, we fallback to the last known branch.
     if (currentBranch !== 'refs/heads/main' && currentBranch !== storedBranch) {
-      latestSha = await githubApi.getShaForBranch(storedBranch);
+      latestShaFromBranch = await githubApi.getShaForBranch(storedBranch);
       downstreamBranch = storedBranch;
     } else {
       throw e;
     }
   }
 
-  console.log(`Comparing ${storedSha}...${latestSha}.`);
-  const affectedFiles = await githubApi.getAffectedFiles(storedSha, latestSha);
+  console.log(`Comparing ${storedSha}...${latestShaFromBranch}.`);
+  const affectedFiles = await githubApi.getAffectedFiles(storedSha, latestShaFromBranch);
   const changedFiles = affectedFiles.filter((file) => file.startsWith(`${assetsPath}/`));
 
   let shaWhenFilesChanged;
   if (changedFiles.length > 0) {
     console.log(
-      `The below files changed between ${storedSha} and ${latestSha}:\n` +
+      `The below files changed between ${storedSha} and ${latestShaFromBranch}:\n` +
         changedFiles.map((f) => '* ' + f).join('\n'),
     );
 
@@ -61,11 +61,11 @@ export async function copyJsonAssets({repo, githubApi, assetsPath, destPath}) {
     execSync('git init', execOptions);
     execSync(`git remote add origin https://github.com/${repo}.git`, execOptions);
     // fetch a commit
-    execSync(`git fetch origin ${latestSha}`, execOptions);
+    execSync(`git fetch origin ${latestShaFromBranch}`, execOptions);
     // reset this repository's main branch to the commit of interest
     execSync('git reset --hard FETCH_HEAD', execOptions);
     // get sha when files where changed
-    shaWhenFilesChanged = execSync(`git rev-list -1 ${latestSha} "${assetsPath}/"`, {
+    shaWhenFilesChanged = execSync(`git rev-list -1 ${latestShaFromBranch} "${assetsPath}/"`, {
       encoding: 'utf8',
       cwd: temporaryDir,
       stdio: ['ignore', 'pipe', 'ignore'],
@@ -91,21 +91,24 @@ export async function copyJsonAssets({repo, githubApi, assetsPath, destPath}) {
 
     console.log(`Successfully updated asset files in '${destPath}'.\n`);
   } else {
-    console.log(`No '${assetsPath}/**' files changed between ${storedSha} and ${latestSha}.`);
+    console.log(
+      `No '${assetsPath}/**' files changed between ${storedSha} and ${latestShaFromBranch}.`,
+    );
   }
 
-  // Write SHA to file.
-  await writeFile(
-    buildInfoPath,
-    JSON.stringify(
-      {
-        branchName: downstreamBranch,
-        sha: shaWhenFilesChanged ?? storedSha,
-      },
-      undefined,
-      2,
-    ),
-  );
+  if (downstreamBranch !== storedBranch || shaWhenFilesChanged)
+    // Write SHA to file.
+    await writeFile(
+      buildInfoPath,
+      JSON.stringify(
+        {
+          branchName: downstreamBranch,
+          sha: shaWhenFilesChanged ?? latestShaFromBranch,
+        },
+        undefined,
+        2,
+      ),
+    );
 
   // The below command will show uncommitted changes.
   // This is expected because the framework repo and component/cli might have different minors
