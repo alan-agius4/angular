@@ -740,6 +740,9 @@ importers:
       autoprefixer:
         specifier: 10.4.21
         version: 10.4.21(postcss@8.5.6)
+      karma:
+        specifier: ~6.4.4
+        version: 6.4.4(bufferutil@4.0.9)(utf-8-validate@6.0.5)
       postcss:
         specifier: 8.5.6
         version: 8.5.6
