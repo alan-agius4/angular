@@ -49,7 +49,9 @@ describe('Terminal', () => {
 
   async function expectWriteStringToTerminal(v: string) {
     TestBed.inject(TerminalHandler).readonlyTerminalInstance().write(v);
-    await expectAsync(until(() => fixture.nativeElement.innerHTML.indexOf(v) > -1)).toBeResolved();
+    await expect(
+      until(() => fixture.nativeElement.innerHTML.indexOf(v) > -1),
+    ).resolves.not.toThrow();
   }
 });
 

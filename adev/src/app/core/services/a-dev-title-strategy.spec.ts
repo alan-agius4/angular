@@ -58,38 +58,46 @@ describe('ADevTitleStrategy', () => {
   });
 
   it(`should set '${TITLE_SUFFIX}' when route doesn't have defined label`, async () => {
-    spyOn(title, 'setTitle');
+    vi.spyOn(title, 'setTitle');
 
     await router.navigateByUrl('/second');
     service.updateTitle(router.routerState.snapshot);
 
-    expect(title.setTitle).toHaveBeenCalledOnceWith(TITLE_SUFFIX);
+    expect(title.setTitle).toHaveBeenCalledTimes(1);
+
+    expect(title.setTitle).toHaveBeenCalledWith(TITLE_SUFFIX);
   });
 
   it(`should set 'Third - ${TITLE_SUFFIX}' when route has defined label equal to 'Third'`, async () => {
-    spyOn(title, 'setTitle');
+    vi.spyOn(title, 'setTitle');
 
     await router.navigateByUrl('/third');
     service.updateTitle(router.routerState.snapshot);
 
-    expect(title.setTitle).toHaveBeenCalledOnceWith('Third • Angular');
+    expect(title.setTitle).toHaveBeenCalledTimes(1);
+
+    expect(title.setTitle).toHaveBeenCalledWith('Third • Angular');
   });
 
   it(`shouldn't take label from the parent route when current route label is not equal to ${DEFAULT_PAGE_TITLE}`, async () => {
-    spyOn(title, 'setTitle');
+    vi.spyOn(title, 'setTitle');
 
     await router.navigateByUrl('/third/child');
     service.updateTitle(router.routerState.snapshot);
 
-    expect(title.setTitle).toHaveBeenCalledOnceWith('Child • Angular');
+    expect(title.setTitle).toHaveBeenCalledTimes(1);
+
+    expect(title.setTitle).toHaveBeenCalledWith('Child • Angular');
   });
 
   it(`should take label from the parent route when current route label is equal to ${DEFAULT_PAGE_TITLE}`, async () => {
-    spyOn(title, 'setTitle');
+    vi.spyOn(title, 'setTitle');
 
     await router.navigateByUrl('/fourth/child');
     service.updateTitle(router.routerState.snapshot);
 
-    expect(title.setTitle).toHaveBeenCalledOnceWith('Fourth • Overview • Angular');
+    expect(title.setTitle).toHaveBeenCalledTimes(1);
+
+    expect(title.setTitle).toHaveBeenCalledWith('Fourth • Overview • Angular');
   });
 });

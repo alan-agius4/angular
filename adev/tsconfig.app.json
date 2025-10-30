@@ -9,6 +9,6 @@
     // respect the tsconfig path mappings.
     "paths": {}
   },
-  "files": ["src/main.ts", "src/main.server.ts"],
-  "include": ["src/**/*.d.ts"]
+  "include": ["src/**/*.ts"],
+  "exclude": ["src/**/*.spec.ts", "src/assets", "src/content"]
 }

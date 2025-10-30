@@ -59,16 +59,16 @@ describe('TypingsLoader', () => {
   it('should read files from directory', async () => {
     await service.retrieveTypeDefinitions(fakeWebContainer);
 
-    expect(
-      service.typings().some(({path}) => path.endsWith(fakeTypeDefinitionFiles[0])),
-    ).toBeTrue();
+    expect(service.typings().some(({path}) => path.endsWith(fakeTypeDefinitionFiles[0]))).toBe(
+      true,
+    );
   });
 
   it('should only contain type definitions files', async () => {
     await service.retrieveTypeDefinitions(fakeWebContainer);
 
     for (const {path} of service.typings()) {
-      expect(path.endsWith('.d.ts')).toBeTrue();
+      expect(path.endsWith('.d.ts')).toBe(true);
     }
   });
 

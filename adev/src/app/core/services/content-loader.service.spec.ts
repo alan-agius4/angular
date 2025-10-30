@@ -106,7 +106,7 @@ describe('ContentLoader', () => {
 
       try {
         await contentPromise;
-        fail('Expected promise to be rejected');
+        throw new Error('Expected promise to be rejected');
       } catch (error) {
         expect(error).toBeInstanceOf(HttpErrorResponse);
         expect((error as HttpErrorResponse).status).toBe(404);
@@ -116,7 +116,7 @@ describe('ContentLoader', () => {
       // because 404 errors are cached
       try {
         await service.getContent(path);
-        fail('Expected second call to be rejected');
+        throw new Error('Expected second call to be rejected');
       } catch (error) {
         expect(error).toBeInstanceOf(HttpErrorResponse);
         expect((error as HttpErrorResponse).status).toBe(404);
@@ -134,7 +134,7 @@ describe('ContentLoader', () => {
 
       try {
         await firstCallPromise;
-        fail('Expected first call to be rejected');
+        throw new Error('Expected first call to be rejected');
       } catch (error) {
         expect(error).toBeInstanceOf(HttpErrorResponse);
         expect((error as HttpErrorResponse).status).toBe(500);
@@ -159,7 +159,7 @@ describe('ContentLoader', () => {
 
       try {
         await firstCallPromise;
-        fail('Expected first call to be rejected');
+        throw new Error('Expected first call to be rejected');
       } catch (error) {
         expect(error).toBeInstanceOf(HttpErrorResponse);
       }

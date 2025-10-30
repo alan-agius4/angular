@@ -258,7 +258,7 @@ describe('Animation', () => {
       init: () => {},
       destroy: () => {},
     };
-    const initSpy = spyOn(mockPlugin, 'init');
+    const initSpy = vi.spyOn(mockPlugin, 'init');
 
     animation.addPlugin(mockPlugin);
 
@@ -270,7 +270,7 @@ describe('Animation', () => {
       init: () => {},
       destroy: () => {},
     };
-    const destroySpy = spyOn(mockPlugin, 'destroy');
+    const destroySpy = vi.spyOn(mockPlugin, 'destroy');
 
     animation.addPlugin(mockPlugin);
     animation.dispose();

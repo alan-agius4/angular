@@ -1,3 +1,4 @@
+import type {Mock} from 'vitest';
 /*!
  * @license
  * Copyright Google LLC All Rights Reserved.
@@ -13,16 +14,16 @@ import {AnalyticsService} from './analytics.service';
 describe('AnalyticsService', () => {
   let service: AnalyticsService;
   let injector: Injector;
-  let gtagSpy: jasmine.Spy;
-  let gtagAppendNodeSpy: jasmine.Spy;
+  let gtagSpy: Mock;
+  let gtagAppendNodeSpy: Mock;
   let windowOnErrorHandler: (event: ErrorEvent) => void;
 
   let mockWindow: any;
   let mockLocalStorage = new MockLocalStorage();
 
   beforeEach(() => {
-    gtagSpy = jasmine.createSpy('gtag');
-    gtagAppendNodeSpy = jasmine.createSpy('gtag.js script head attach');
+    gtagSpy = vi.fn();
+    gtagAppendNodeSpy = vi.fn();
 
     mockWindow = {
       name: 'Some name',
@@ -49,12 +50,12 @@ describe('AnalyticsService', () => {
 
     // The `gtag` function is attached to the `Window`, so we can spy on it
     // after the service has been initialized.
-    gtagSpy = spyOn(mockWindow, 'gtag');
+    gtagSpy = vi.spyOn(mockWindow, 'gtag');
   });
 
   describe('error reporting', () => {
     it('should subscribe to window uncaught errors and report them', () => {
-      spyOn(service, 'reportError');
+      vi.spyOn(service, 'reportError');
 
       windowOnErrorHandler(
         new ErrorEvent('error', {
@@ -64,13 +65,13 @@ describe('AnalyticsService', () => {
 
       expect(service.reportError).toHaveBeenCalledTimes(1);
       expect(service.reportError).toHaveBeenCalledWith(
-        jasmine.stringContaining('Test Error\n'),
+        expect.stringContaining('Test Error\n'),
         true,
       );
     });
 
     it('should report errors to analytics by dispatching `gtag` and `ga` events', () => {
-      gtagSpy.calls.reset();
+      gtagSpy.mockClear();
 
       windowOnErrorHandler(
         new ErrorEvent('error', {
@@ -82,8 +83,8 @@ describe('AnalyticsService', () => {
       expect(gtagSpy).toHaveBeenCalledWith(
         'event',
         'exception',
-        jasmine.objectContaining({
-          description: jasmine.stringContaining('Test Error\n'),
+        expect.objectContaining({
+          description: expect.stringContaining('Test Error\n'),
           fatal: true,
         }),
       );

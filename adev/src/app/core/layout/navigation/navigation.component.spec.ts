@@ -68,7 +68,7 @@ describe('Navigation', () => {
 
     const docsLink = fixture.debugElement.query(By.css('a[href="/docs"]')).parent?.nativeElement;
 
-    expect(docsLink).toHaveClass('adev-nav-item--active');
+    expect(docsLink.classList.contains('adev-nav-item--active')).toBe(true);
   });
 
   it('should not have active class when activeRouteItem is null', () => {
@@ -79,15 +79,15 @@ describe('Navigation', () => {
     const docsLink = fixture.debugElement.query(By.css('a[href="/docs"]')).nativeElement;
     const referenceLink = fixture.debugElement.query(By.css('a[href="/reference"]')).nativeElement;
 
-    expect(docsLink).not.toHaveClass('adev-nav-item--active');
-    expect(referenceLink).not.toHaveClass('adev-nav-item--active');
+    expect(docsLink.classList.contains('adev-nav-item--active')).toBe(false);
+    expect(referenceLink.classList.contains('adev-nav-item--active')).toBe(false);
   });
 
   it('should call themeManager.setTheme(dark) when user tries to set dark theme', () => {
     const openThemePickerButton = fixture.debugElement.query(
       By.css('button[aria-label^="Open theme picker"]'),
     ).nativeElement;
-    const setThemeSpy = spyOn(fakeThemeManager, 'setTheme');
+    const setThemeSpy = vi.spyOn(fakeThemeManager, 'setTheme');
 
     openThemePickerButton.click();
     fixture.detectChanges();
@@ -98,6 +98,8 @@ describe('Navigation', () => {
 
     setDarkModeButton.click();
 
-    expect(setThemeSpy).toHaveBeenCalledOnceWith('dark');
+    expect(setThemeSpy).toHaveBeenCalledTimes(1);
+
+    expect(setThemeSpy).toHaveBeenCalledWith('dark');
   });
 });

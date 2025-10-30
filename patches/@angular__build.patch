@@ -1,0 +1,376 @@
+diff --git a/src/builders/unit-test/runners/vitest/browser-provider.js b/src/builders/unit-test/runners/vitest/browser-provider.js
+index 37d3175f71655ac78cd945deb6bc634cc9e13009..a376567f0618fa87f601af46f8938eaba8fe0e20 100755
+--- a/src/builders/unit-test/runners/vitest/browser-provider.js
++++ b/src/builders/unit-test/runners/vitest/browser-provider.js
+@@ -82,7 +82,11 @@ async function setupBrowserConfiguration(browsers, debug, projectSourceRoot, vie
+             // Validate that the imported module has the expected structure
+             const providerFactory = providerModule[providerName];
+             if (typeof providerFactory === 'function') {
+-                provider = providerFactory();
++                provider = providerFactory({
++                  launchOptions: {
++                    executablePath: process.env.CHROME_BIN
++                  }
++                });
+             }
+             else {
+                 errors ??= [];
+diff --git a/src/builders/unit-test/runners/vitest/executor.js b/src/builders/unit-test/runners/vitest/executor.js
+index d955fa5e32b71337d96a57c4ef56ff2b59201b00..b102dac0649b1c0ae34942ec33b980f6f19dda40 100755
+--- a/src/builders/unit-test/runners/vitest/executor.js
++++ b/src/builders/unit-test/runners/vitest/executor.js
+@@ -167,6 +167,12 @@ class VitestExecutor {
+                 });
+             }
+         };
++const { createRequire } = require('node:module');
++const { dirname } = require('node:path');
++
++              const requireFromRoot = createRequire(workspaceRoot + '/')
++                const requireFromVite = createRequire(dirname(requireFromRoot.resolve('vitest')) + '/')
++
+         // Setup vitest browser options if configured
+         const browserOptions = await (0, browser_provider_1.setupBrowserConfiguration)(browsers, debug, this.options.projectSourceRoot, browserViewport);
+         if (browserOptions.errors?.length) {
+@@ -195,7 +201,6 @@ class VitestExecutor {
+             config: runnerConfig === true
+                 ? await (0, configuration_1.findVitestBaseConfig)([this.options.projectRoot, this.options.workspaceRoot])
+                 : runnerConfig,
+-            root: workspaceRoot,
+             project: ['base', this.projectName],
+             name: 'base',
+             include: [],
+@@ -203,6 +208,23 @@ class VitestExecutor {
+             watch,
+             ui,
+         }, {
++          root: workspaceRoot,
++          resolve: {
++            alias: {
++                "@vitest/runner": requireFromVite.resolve('@vitest/runner'),
++                "expect-type": requireFromVite.resolve('expect-type'),
++                "@vitest/snapshot": requireFromVite.resolve('@vitest/snapshot'),
++                "@vitest/utils": requireFromVite.resolve('@vitest/utils'),
++                "@vitest/spy": requireFromVite.resolve('@vitest/spy'),
++            },
++            mainFields: ['es2020', 'browser', 'module', 'main'],
++            preserveSymlinks: true,
++            optimizeDeps: {
++              noDiscovery: true,
++              include: undefined,
++            },
++          },
++
+             test: {
+                 coverage: await generateCoverageOption(coverage, this.projectName),
+                 outputFile,
+diff --git a/src/builders/unit-test/runners/vitest/plugins.js b/src/builders/unit-test/runners/vitest/plugins.js
+index 809481fe7477a1b6dd45cde972e2aa481ab597be..71c65fdbdeaad3a1fa04c3bfb60162fba65e0358 100755
+--- a/src/builders/unit-test/runners/vitest/plugins.js
++++ b/src/builders/unit-test/runners/vitest/plugins.js
+@@ -1,4 +1,4 @@
+-"use strict";
++'use strict';
+ /**
+  * @license
+  * Copyright Google LLC All Rights Reserved.
+@@ -6,136 +6,172 @@
+  * Use of this source code is governed by an MIT-style license that can be
+  * found in the LICENSE file at https://angular.dev/license
+  */
+-var __importDefault = (this && this.__importDefault) || function (mod) {
+-    return (mod && mod.__esModule) ? mod : { "default": mod };
+-};
+-Object.defineProperty(exports, "__esModule", { value: true });
++var __importDefault =
++  (this && this.__importDefault) ||
++  function (mod) {
++    return mod && mod.__esModule ? mod : {'default': mod};
++  };
++Object.defineProperty(exports, '__esModule', {value: true});
+ exports.createVitestPlugins = createVitestPlugins;
+-const node_assert_1 = __importDefault(require("node:assert"));
+-const promises_1 = require("node:fs/promises");
+-const node_path_1 = __importDefault(require("node:path"));
+-const assets_middleware_1 = require("../../../../tools/vite/middlewares/assets-middleware");
+-const path_1 = require("../../../../utils/path");
++const node_assert_1 = __importDefault(require('node:assert'));
++const promises_1 = require('node:fs/promises');
++const node_path_1 = __importDefault(require('node:path'));
++const assets_middleware_1 = require('../../../../tools/vite/middlewares/assets-middleware');
++const path_1 = require('../../../../utils/path');
++const { createRequire } = require('node:module');
++const { dirname } = require('node:path');
+ function createVitestPlugins(options, testSetupFiles, browserOptions, pluginOptions) {
+-    const { workspaceRoot, projectName, buildResultFiles, testFileToEntryPoint } = pluginOptions;
+-    return [
+-        {
+-            name: 'angular:project-init',
+-            // Type is incorrect. This allows a Promise<void>.
+-            // eslint-disable-next-line @typescript-eslint/no-misused-promises
+-            configureVitest: async (context) => {
+-                // Create a subproject that can be configured with plugins for browser mode.
+-                // Plugins defined directly in the vite overrides will not be present in the
+-                // browser specific Vite instance.
+-                await context.injectTestProjects({
+-                    test: {
+-                        name: projectName,
+-                        root: workspaceRoot,
+-                        globals: true,
+-                        setupFiles: testSetupFiles,
+-                        include: options.include,
+-                        ...(options.exclude ? { exclude: options.exclude } : {}),
+-                        browser: browserOptions.browser,
+-                        // Use `jsdom` if no browsers are explicitly configured.
+-                        ...(browserOptions.browser ? {} : { environment: 'jsdom' }),
++  const {workspaceRoot, projectName, buildResultFiles, testFileToEntryPoint} = pluginOptions;
++  return [
++    {
++      name: 'angular:project-init',
++      // Type is incorrect. This allows a Promise<void>.
++      // eslint-disable-next-line @typescript-eslint/no-misused-promises
++      configureVitest: async (context) => {
++        // Create a subproject that can be configured with plugins for browser mode.
++        // Plugins defined directly in the vite overrides will not be present in the
++        // browser specific Vite instance.
++        const requireFromRoot = createRequire(workspaceRoot + '/')
++        const requireFromVite = createRequire(dirname(requireFromRoot.resolve('vitest')) + '/')
++
++        await context.injectTestProjects({
++          root: workspaceRoot,
++          resolve: {
++            alias: {
++                "@vitest/runner": requireFromVite.resolve('@vitest/runner'),
++                "expect-type": requireFromVite.resolve('expect-type'),
++                "@vitest/snapshot": requireFromVite.resolve('@vitest/snapshot'),
++                "@vitest/utils": requireFromVite.resolve('@vitest/utils'),
++                "@vitest/spy": requireFromVite.resolve('@vitest/spy'),
++            },
++            mainFields: ['es2020', 'browser', 'module', 'main'],
++            preserveSymlinks: true,
++            optimizeDeps: {
++              noDiscovery: true,
++              include: undefined,
++            },
++          },
++
++          test: {
++            name: projectName,
++            root: workspaceRoot,
++            globals: true,
++            setupFiles: testSetupFiles,
++            include: options.include,
++            ...(options.exclude ? {exclude: options.exclude} : {}),
++            browser: browserOptions.browser,
++            // Use `jsdom` if no browsers are explicitly configured.
++            ...(browserOptions.browser ? {} : {environment: 'jsdom'}),
++          },
++          plugins: [
++            {
++              name: 'angular:test-in-memory-provider',
++              enforce: 'pre',
++              resolveId: (id, importer) => {
++                if (importer && (id[0] === '.' || id[0] === '/')) {
++                  let fullPath;
++                  if (testFileToEntryPoint.has(importer)) {
++                    fullPath = (0, path_1.toPosixPath)(node_path_1.default.join(workspaceRoot, id));
++                  } else {
++                    fullPath = (0, path_1.toPosixPath)(
++                      node_path_1.default.join(node_path_1.default.dirname(importer), id),
++                    );
++                  }
++                  const relativePath = node_path_1.default.relative(workspaceRoot, fullPath);
++                  if (buildResultFiles.has((0, path_1.toPosixPath)(relativePath))) {
++                    return fullPath;
++                  }
++                }
++                if (testFileToEntryPoint.has(id)) {
++                  return id;
++                }
++                (0, node_assert_1.default)(
++                  buildResultFiles.size > 0,
++                  'buildResult must be available for resolving.',
++                );
++                const relativePath = node_path_1.default.relative(workspaceRoot, id);
++                if (buildResultFiles.has((0, path_1.toPosixPath)(relativePath))) {
++                  return id;
++                }
++              },
++              load: async (id) => {
++                (0, node_assert_1.default)(
++                  buildResultFiles.size > 0,
++                  'buildResult must be available for in-memory loading.',
++                );
++                // Attempt to load as a source test file.
++                const entryPoint = testFileToEntryPoint.get(id);
++                let outputPath;
++                if (entryPoint) {
++                  outputPath = entryPoint + '.js';
++                  // To support coverage exclusion of the actual test file, the virtual
++                  // test entry point only references the built and bundled intermediate file.
++                  return {
++                    code: `import "./${outputPath}";`,
++                  };
++                } else {
++                  // Attempt to load as a built artifact.
++                  const relativePath = node_path_1.default.relative(workspaceRoot, id);
++                  outputPath = (0, path_1.toPosixPath)(relativePath);
++                }
++                const outputFile = buildResultFiles.get(outputPath);
++                if (outputFile) {
++                  const sourceMapPath = outputPath + '.map';
++                  const sourceMapFile = buildResultFiles.get(sourceMapPath);
++                  const code =
++                    outputFile.origin === 'memory'
++                      ? Buffer.from(outputFile.contents).toString('utf-8')
++                      : await (0, promises_1.readFile)(outputFile.inputPath, 'utf-8');
++                  const sourceMapText = sourceMapFile
++                    ? sourceMapFile.origin === 'memory'
++                      ? Buffer.from(sourceMapFile.contents).toString('utf-8')
++                      : await (0, promises_1.readFile)(sourceMapFile.inputPath, 'utf-8')
++                    : undefined;
++                  // Vitest will include files in the coverage report if the sourcemap contains no sources.
++                  // For builder-internal generated code chunks, which are typically helper functions,
++                  // a virtual source is added to the sourcemap to prevent them from being incorrectly
++                  // included in the final coverage report.
++                  const map = sourceMapText ? JSON.parse(sourceMapText) : undefined;
++                  if (map) {
++                    if (!map.sources?.length && !map.sourcesContent?.length && !map.mappings) {
++                      map.sources = ['virtual:builder'];
++                    }
++                  }
++                  return {
++                    code,
++                    map,
++                  };
++                }
++              },
++              configureServer: (server) => {
++                server.middlewares.use(
++                  (0, assets_middleware_1.createBuildAssetsMiddleware)(
++                    server.config.base,
++                    buildResultFiles,
++                  ),
++                );
++              },
++            },
++            {
++              name: 'angular:html-index',
++              transformIndexHtml: () => {
++                // Add all global stylesheets
++                if (buildResultFiles.has('styles.css')) {
++                  return [
++                    {
++                      tag: 'link',
++                      attrs: {href: 'styles.css', rel: 'stylesheet'},
++                      injectTo: 'head',
+                     },
+-                    plugins: [
+-                        {
+-                            name: 'angular:test-in-memory-provider',
+-                            enforce: 'pre',
+-                            resolveId: (id, importer) => {
+-                                if (importer && (id[0] === '.' || id[0] === '/')) {
+-                                    let fullPath;
+-                                    if (testFileToEntryPoint.has(importer)) {
+-                                        fullPath = (0, path_1.toPosixPath)(node_path_1.default.join(workspaceRoot, id));
+-                                    }
+-                                    else {
+-                                        fullPath = (0, path_1.toPosixPath)(node_path_1.default.join(node_path_1.default.dirname(importer), id));
+-                                    }
+-                                    const relativePath = node_path_1.default.relative(workspaceRoot, fullPath);
+-                                    if (buildResultFiles.has((0, path_1.toPosixPath)(relativePath))) {
+-                                        return fullPath;
+-                                    }
+-                                }
+-                                if (testFileToEntryPoint.has(id)) {
+-                                    return id;
+-                                }
+-                                (0, node_assert_1.default)(buildResultFiles.size > 0, 'buildResult must be available for resolving.');
+-                                const relativePath = node_path_1.default.relative(workspaceRoot, id);
+-                                if (buildResultFiles.has((0, path_1.toPosixPath)(relativePath))) {
+-                                    return id;
+-                                }
+-                            },
+-                            load: async (id) => {
+-                                (0, node_assert_1.default)(buildResultFiles.size > 0, 'buildResult must be available for in-memory loading.');
+-                                // Attempt to load as a source test file.
+-                                const entryPoint = testFileToEntryPoint.get(id);
+-                                let outputPath;
+-                                if (entryPoint) {
+-                                    outputPath = entryPoint + '.js';
+-                                    // To support coverage exclusion of the actual test file, the virtual
+-                                    // test entry point only references the built and bundled intermediate file.
+-                                    return {
+-                                        code: `import "./${outputPath}";`,
+-                                    };
+-                                }
+-                                else {
+-                                    // Attempt to load as a built artifact.
+-                                    const relativePath = node_path_1.default.relative(workspaceRoot, id);
+-                                    outputPath = (0, path_1.toPosixPath)(relativePath);
+-                                }
+-                                const outputFile = buildResultFiles.get(outputPath);
+-                                if (outputFile) {
+-                                    const sourceMapPath = outputPath + '.map';
+-                                    const sourceMapFile = buildResultFiles.get(sourceMapPath);
+-                                    const code = outputFile.origin === 'memory'
+-                                        ? Buffer.from(outputFile.contents).toString('utf-8')
+-                                        : await (0, promises_1.readFile)(outputFile.inputPath, 'utf-8');
+-                                    const sourceMapText = sourceMapFile
+-                                        ? sourceMapFile.origin === 'memory'
+-                                            ? Buffer.from(sourceMapFile.contents).toString('utf-8')
+-                                            : await (0, promises_1.readFile)(sourceMapFile.inputPath, 'utf-8')
+-                                        : undefined;
+-                                    // Vitest will include files in the coverage report if the sourcemap contains no sources.
+-                                    // For builder-internal generated code chunks, which are typically helper functions,
+-                                    // a virtual source is added to the sourcemap to prevent them from being incorrectly
+-                                    // included in the final coverage report.
+-                                    const map = sourceMapText ? JSON.parse(sourceMapText) : undefined;
+-                                    if (map) {
+-                                        if (!map.sources?.length && !map.sourcesContent?.length && !map.mappings) {
+-                                            map.sources = ['virtual:builder'];
+-                                        }
+-                                    }
+-                                    return {
+-                                        code,
+-                                        map,
+-                                    };
+-                                }
+-                            },
+-                            configureServer: (server) => {
+-                                server.middlewares.use((0, assets_middleware_1.createBuildAssetsMiddleware)(server.config.base, buildResultFiles));
+-                            },
+-                        },
+-                        {
+-                            name: 'angular:html-index',
+-                            transformIndexHtml: () => {
+-                                // Add all global stylesheets
+-                                if (buildResultFiles.has('styles.css')) {
+-                                    return [
+-                                        {
+-                                            tag: 'link',
+-                                            attrs: { href: 'styles.css', rel: 'stylesheet' },
+-                                            injectTo: 'head',
+-                                        },
+-                                    ];
+-                                }
+-                                return [];
+-                            },
+-                        },
+-                    ],
+-                });
++                  ];
++                }
++                return [];
++              },
+             },
+-        },
+-    ];
++          ],
++        });
++      },
++    },
++  ];
+ }
+ //# sourceMappingURL=plugins.js.map

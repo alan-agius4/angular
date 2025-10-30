@@ -144,9 +144,9 @@ describe('NodeRuntimeSandbox', () => {
     const fakeSpawn = new FakeWebContainerProcess();
     fakeSpawn.exit = Promise.resolve(10);
 
-    spyOn(service, 'spawn' as any)
+    vi.spyOn(service, 'spawn' as any)
       .withArgs(PACKAGE_MANAGER, ['install'])
-      .and.returnValue(fakeSpawn);
+      .mockReturnValue(fakeSpawn);
 
     await service.init();
 
@@ -167,13 +167,14 @@ describe('NodeRuntimeSandbox', () => {
 
     const fakeWebContainer = new FakeWebContainer();
     service['webContainerPromise'] = Promise.resolve(fakeWebContainer as unknown as WebContainer);
-    const writeFileSpy = spyOn(fakeWebContainer.fs, 'writeFile');
+    const writeFileSpy = vi.spyOn(fakeWebContainer.fs, 'writeFile');
 
     const path = 'path';
     const content = 'content';
 
     await service.writeFile(path, content);
-    expect(writeFileSpy).toHaveBeenCalledOnceWith(path, content);
+    expect(writeFileSpy).toHaveBeenCalledTimes(1);
+    expect(writeFileSpy).toHaveBeenCalledWith(path, content);
   });
 
   it('should call renameFile with proper parameters', async () => {
@@ -181,13 +182,14 @@ describe('NodeRuntimeSandbox', () => {
 
     const fakeWebContainer = new FakeWebContainer();
     service['webContainerPromise'] = Promise.resolve(fakeWebContainer as unknown as WebContainer);
-    const renameFileSpy = spyOn(fakeWebContainer.fs, 'rename');
+    const renameFileSpy = vi.spyOn(fakeWebContainer.fs, 'rename');
 
     const oldPath = 'oldPath';
     const newPath = 'newPath';
 
     await service.renameFile(oldPath, newPath);
-    expect(renameFileSpy).toHaveBeenCalledOnceWith(oldPath, newPath);
+    expect(renameFileSpy).toHaveBeenCalledTimes(1);
+    expect(renameFileSpy).toHaveBeenCalledWith(oldPath, newPath);
   });
 
   it('should initialize a project based on the tutorial config', async () => {
@@ -196,7 +198,7 @@ describe('NodeRuntimeSandbox', () => {
     );
     setValuesToInitializeProject();
 
-    const initProjectSpy = spyOn(service, 'initProject' as any);
+    const initProjectSpy = vi.spyOn(service, 'initProject' as any);
 
     await service.init();
 
@@ -216,8 +218,8 @@ describe('NodeRuntimeSandbox', () => {
   });
 
   it('should run reset only once when called twice', async () => {
-    const cleanupSpy = spyOn(service, 'cleanup' as any);
-    const initSpy = spyOn(service, 'init' as any);
+    const cleanupSpy = vi.spyOn(service, 'cleanup' as any);
+    const initSpy = vi.spyOn(service, 'init' as any);
 
     setValuesToInitializeProject();
 
@@ -226,8 +228,11 @@ describe('NodeRuntimeSandbox', () => {
 
     await Promise.all([resetPromise, secondResetPromise]);
 
-    expect(cleanupSpy).toHaveBeenCalledOnceWith();
-    expect(initSpy).toHaveBeenCalledOnceWith();
+    expect(cleanupSpy).toHaveBeenCalledTimes(1);
+
+    expect(cleanupSpy).toHaveBeenCalledWith();
+    expect(initSpy).toHaveBeenCalledTimes(1);
+    expect(initSpy).toHaveBeenCalledWith();
   });
 
   it('should delete files on project change', async () => {
@@ -248,7 +253,7 @@ describe('NodeRuntimeSandbox', () => {
     const createdFiles = ['created.ts'];
     service['_createdFiles'].set(new Set(createdFiles));
 
-    const deleteFileSpy = spyOn(service, 'deleteFile');
+    const deleteFileSpy = vi.spyOn(service, 'deleteFile');
 
     tutorialChanged$.next(true);
 

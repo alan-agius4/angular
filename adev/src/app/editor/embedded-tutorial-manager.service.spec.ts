@@ -226,7 +226,7 @@ describe('EmbeddedTutorialManager', () => {
   });
 
   it('should trigger tutorial change on reveal answer', () => {
-    const _shouldChangeTutorial$Spy = spyOn(service['_shouldChangeTutorial$'], 'next');
+    const _shouldChangeTutorial$Spy = vi.spyOn(service['_shouldChangeTutorial$'], 'next');
 
     service.revealAnswer();
 
@@ -255,11 +255,10 @@ describe('EmbeddedTutorialManager', () => {
         allFiles: [],
       };
 
-      const fetchMock = spyOn(window, 'fetch');
-      fetchMock.and.returnValues(
-        Promise.resolve(new Response(JSON.stringify(tutorialSourceCode))),
-        Promise.resolve(new Response(JSON.stringify(metadata))),
-      );
+      const fetchMock = vi.spyOn(window, 'fetch');
+      fetchMock
+        .mockReturnValueOnce(Promise.resolve(new Response(JSON.stringify(tutorialSourceCode))))
+        .mockReturnValueOnce(Promise.resolve(new Response(JSON.stringify(metadata))));
 
       await service.fetchAndSetTutorialFiles(tutorial);
 
@@ -279,41 +278,43 @@ describe('EmbeddedTutorialManager', () => {
     });
 
     it('should throw an error if the tutorial files cannot be fetched', async () => {
-      const fetchMock = spyOn(window, 'fetch');
+      const fetchMock = vi.spyOn(window, 'fetch');
 
       fetchMock
         .withArgs(`${TUTORIALS_ASSETS_WEB_PATH}/${tutorial}/source-code.json`)
-        .and.returnValues(Promise.resolve(new Response(null, {status: 404})));
+        .mockReturnValueOnce(Promise.resolve(new Response(null, {status: 404})));
 
       fetchMock
         .withArgs(`${TUTORIALS_ASSETS_WEB_PATH}/${tutorial}/metadata.json`)
-        .and.returnValues(Promise.resolve(new Response(null, {status: 404})));
+        .mockReturnValueOnce(Promise.resolve(new Response(null, {status: 404})));
 
-      await expectAsync(service.fetchAndSetTutorialFiles(tutorial)).toBeRejectedWithError(
+      await expect(service.fetchAndSetTutorialFiles(tutorial)).rejects.toThrowError(
         `Missing source code for tutorial ${tutorial}`,
       );
     });
 
     it('should not set shouldReinstallDependencies if project did not change', async () => {
-      const fetchMock = spyOn(window, 'fetch');
+      const fetchMock = vi.spyOn(window, 'fetch');
 
       fetchMock
         .withArgs(`${TUTORIALS_ASSETS_WEB_PATH}/${tutorial}/source-code.json`)
-        .and.returnValues(Promise.resolve(new Response('{}', {status: 200})));
+        .mockReturnValueOnce(Promise.resolve(new Response('{}', {status: 200})));
 
-      fetchMock.withArgs(`${TUTORIALS_ASSETS_WEB_PATH}/${tutorial}/metadata.json`).and.returnValues(
-        Promise.resolve(
-          new Response(
-            JSON.stringify({
-              dependencies: {
-                '@angular/core': '2.0.0',
-              },
-              allFiles: [],
-            }),
-            {status: 200},
+      fetchMock
+        .withArgs(`${TUTORIALS_ASSETS_WEB_PATH}/${tutorial}/metadata.json`)
+        .mockReturnValueOnce(
+          Promise.resolve(
+            new Response(
+              JSON.stringify({
+                dependencies: {
+                  '@angular/core': '2.0.0',
+                },
+                allFiles: [],
+              }),
+              {status: 200},
+            ),
           ),
-        ),
-      );
+        );
 
       await service['fetchAndSetTutorialFiles'](tutorial);
 
@@ -321,25 +322,27 @@ describe('EmbeddedTutorialManager', () => {
     });
 
     it('should trigger shouldReInstallDependencies if new metadata has different dependencies', async () => {
-      const fetchMock = spyOn(window, 'fetch');
+      const fetchMock = vi.spyOn(window, 'fetch');
 
       fetchMock
         .withArgs(`${TUTORIALS_ASSETS_WEB_PATH}/${tutorial}/source-code.json`)
-        .and.returnValues(Promise.resolve(new Response('{}', {status: 200})));
+        .mockReturnValueOnce(Promise.resolve(new Response('{}', {status: 200})));
 
-      fetchMock.withArgs(`${TUTORIALS_ASSETS_WEB_PATH}/${tutorial}/metadata.json`).and.returnValues(
-        Promise.resolve(
-          new Response(
-            JSON.stringify({
-              dependencies: {
-                '@angular/core': '2.0.0',
-              },
-              allFiles: [],
-            }),
-            {status: 200},
+      fetchMock
+        .withArgs(`${TUTORIALS_ASSETS_WEB_PATH}/${tutorial}/metadata.json`)
+        .mockReturnValueOnce(
+          Promise.resolve(
+            new Response(
+              JSON.stringify({
+                dependencies: {
+                  '@angular/core': '2.0.0',
+                },
+                allFiles: [],
+              }),
+              {status: 200},
+            ),
           ),
-        ),
-      );
+        );
 
       service['tutorialId'].set('previous-tutorial');
       service['dependencies'].set({
@@ -352,25 +355,27 @@ describe('EmbeddedTutorialManager', () => {
     });
 
     it('should trigger shouldReInstallDependencies if new metadata has dependencies and previous dependencies were empty', async () => {
-      const fetchMock = spyOn(window, 'fetch');
+      const fetchMock = vi.spyOn(window, 'fetch');
 
       fetchMock
         .withArgs(`${TUTORIALS_ASSETS_WEB_PATH}/${tutorial}/source-code.json`)
-        .and.returnValues(Promise.resolve(new Response('{}', {status: 200})));
+        .mockReturnValueOnce(Promise.resolve(new Response('{}', {status: 200})));
 
-      fetchMock.withArgs(`${TUTORIALS_ASSETS_WEB_PATH}/${tutorial}/metadata.json`).and.returnValues(
-        Promise.resolve(
-          new Response(
-            JSON.stringify({
-              dependencies: {
-                '@angular/core': '2.0.0',
-              },
-              allFiles: [],
-            }),
-            {status: 200},
+      fetchMock
+        .withArgs(`${TUTORIALS_ASSETS_WEB_PATH}/${tutorial}/metadata.json`)
+        .mockReturnValueOnce(
+          Promise.resolve(
+            new Response(
+              JSON.stringify({
+                dependencies: {
+                  '@angular/core': '2.0.0',
+                },
+                allFiles: [],
+              }),
+              {status: 200},
+            ),
           ),
-        ),
-      );
+        );
 
       service['tutorialId'].set('previous-tutorial');
       service['dependencies'].set({});
@@ -381,25 +386,27 @@ describe('EmbeddedTutorialManager', () => {
     });
 
     it('should not trigger shouldReInstallDependencies if new metadata has same dependencies', async () => {
-      const fetchMock = spyOn(window, 'fetch');
+      const fetchMock = vi.spyOn(window, 'fetch');
 
       fetchMock
         .withArgs(`${TUTORIALS_ASSETS_WEB_PATH}/${tutorial}/source-code.json`)
-        .and.returnValues(Promise.resolve(new Response('{}', {status: 200})));
+        .mockReturnValueOnce(Promise.resolve(new Response('{}', {status: 200})));
 
-      fetchMock.withArgs(`${TUTORIALS_ASSETS_WEB_PATH}/${tutorial}/metadata.json`).and.returnValues(
-        Promise.resolve(
-          new Response(
-            JSON.stringify({
-              dependencies: {
-                '@angular/core': '1.0.0',
-              },
-              allFiles: [],
-            }),
-            {status: 200},
+      fetchMock
+        .withArgs(`${TUTORIALS_ASSETS_WEB_PATH}/${tutorial}/metadata.json`)
+        .mockReturnValueOnce(
+          Promise.resolve(
+            new Response(
+              JSON.stringify({
+                dependencies: {
+                  '@angular/core': '1.0.0',
+                },
+                allFiles: [],
+              }),
+              {status: 200},
+            ),
           ),
-        ),
-      );
+        );
 
       service['tutorialId'].set('previous-tutorial');
       service['dependencies'].set({
@@ -412,24 +419,26 @@ describe('EmbeddedTutorialManager', () => {
     });
 
     it('should set files to delete on project change if previous project has unused files', async () => {
-      const fetchMock = spyOn(window, 'fetch');
+      const fetchMock = vi.spyOn(window, 'fetch');
 
       fetchMock
         .withArgs(`${TUTORIALS_ASSETS_WEB_PATH}/${tutorial}/source-code.json`)
-        .and.returnValues(Promise.resolve(new Response('{}', {status: 200})));
+        .mockReturnValueOnce(Promise.resolve(new Response('{}', {status: 200})));
 
       const allFiles = ['file1.ts', 'file2.ts'];
 
-      fetchMock.withArgs(`${TUTORIALS_ASSETS_WEB_PATH}/${tutorial}/metadata.json`).and.returnValues(
-        Promise.resolve(
-          new Response(
-            JSON.stringify({
-              allFiles,
-            }),
-            {status: 200},
+      fetchMock
+        .withArgs(`${TUTORIALS_ASSETS_WEB_PATH}/${tutorial}/metadata.json`)
+        .mockReturnValueOnce(
+          Promise.resolve(
+            new Response(
+              JSON.stringify({
+                allFiles,
+              }),
+              {status: 200},
+            ),
           ),
-        ),
-      );
+        );
 
       const unusedFiles = ['old-file.ts', 'old-file.css'];
       const previousFiles = [...allFiles, ...unusedFiles];
@@ -443,24 +452,26 @@ describe('EmbeddedTutorialManager', () => {
     });
 
     it('should set no files to delete on project change if previous project has same files as new project', async () => {
-      const fetchMock = spyOn(window, 'fetch');
+      const fetchMock = vi.spyOn(window, 'fetch');
 
       fetchMock
         .withArgs(`${TUTORIALS_ASSETS_WEB_PATH}/${tutorial}/source-code.json`)
-        .and.returnValues(Promise.resolve(new Response('{}', {status: 200})));
+        .mockReturnValueOnce(Promise.resolve(new Response('{}', {status: 200})));
 
       const allFiles = ['file1.ts', 'file2.ts'];
 
-      fetchMock.withArgs(`${TUTORIALS_ASSETS_WEB_PATH}/${tutorial}/metadata.json`).and.returnValues(
-        Promise.resolve(
-          new Response(
-            JSON.stringify({
-              allFiles,
-            }),
-            {status: 200},
+      fetchMock
+        .withArgs(`${TUTORIALS_ASSETS_WEB_PATH}/${tutorial}/metadata.json`)
+        .mockReturnValueOnce(
+          Promise.resolve(
+            new Response(
+              JSON.stringify({
+                allFiles,
+              }),
+              {status: 200},
+            ),
           ),
-        ),
-      );
+        );
 
       service['tutorialId'].set('previous-tutorial');
       service['allFiles'].set(allFiles);
@@ -471,24 +482,26 @@ describe('EmbeddedTutorialManager', () => {
     });
 
     it('should not set files to delete if project did not change', async () => {
-      const fetchMock = spyOn(window, 'fetch');
+      const fetchMock = vi.spyOn(window, 'fetch');
 
       fetchMock
         .withArgs(`${TUTORIALS_ASSETS_WEB_PATH}/${tutorial}/source-code.json`)
-        .and.returnValues(Promise.resolve(new Response('{}', {status: 200})));
+        .mockReturnValueOnce(Promise.resolve(new Response('{}', {status: 200})));
 
       const allFiles = ['file1.ts', 'file2.ts'];
 
-      fetchMock.withArgs(`${TUTORIALS_ASSETS_WEB_PATH}/${tutorial}/metadata.json`).and.returnValues(
-        Promise.resolve(
-          new Response(
-            JSON.stringify({
-              allFiles,
-            }),
-            {status: 200},
+      fetchMock
+        .withArgs(`${TUTORIALS_ASSETS_WEB_PATH}/${tutorial}/metadata.json`)
+        .mockReturnValueOnce(
+          Promise.resolve(
+            new Response(
+              JSON.stringify({
+                allFiles,
+              }),
+              {status: 200},
+            ),
           ),
-        ),
-      );
+        );
 
       expect(service['allFiles']().length).toBe(0);
 

@@ -117,7 +117,7 @@ describe('Tutorial', () => {
     component = fixture.componentInstance;
 
     // Replace EmbeddedEditor with FakeEmbeddedEditor
-    spyOn(component as any, 'loadEmbeddedEditorComponent').and.resolveTo(FakeEmbeddedEditor);
+    vi.spyOn(component as any, 'loadEmbeddedEditorComponent').mockResolvedValue(FakeEmbeddedEditor);
 
     fixture.detectChanges();
   });
@@ -138,8 +138,11 @@ describe('Tutorial', () => {
     const revealAnswerButton = component.revealAnswerButton();
     if (!revealAnswerButton) throw new Error('revealAnswerButton is undefined');
 
-    const revealAnswerSpy = spyOn(component['embeddedTutorialManager'], 'revealAnswer');
-    const resetRevealAnswerSpy = spyOn(component['embeddedTutorialManager'], 'resetRevealAnswer');
+    const revealAnswerSpy = vi.spyOn(component['embeddedTutorialManager'], 'revealAnswer');
+    const resetRevealAnswerSpy = vi.spyOn(
+      component['embeddedTutorialManager'],
+      'resetRevealAnswer',
+    );
 
     revealAnswerButton.nativeElement.click();
 
@@ -154,7 +157,7 @@ describe('Tutorial', () => {
     const revealAnswerButton = component.revealAnswerButton();
     if (!revealAnswerButton) throw new Error('revealAnswerButton is undefined');
 
-    const embeddedTutorialManagerRevealAnswerSpy = spyOn(
+    const embeddedTutorialManagerRevealAnswerSpy = vi.spyOn(
       component['embeddedTutorialManager'],
       'revealAnswer',
     );
@@ -177,9 +180,9 @@ describe('Tutorial', () => {
     const revealAnswerButton = component.revealAnswerButton();
     if (!revealAnswerButton) throw new Error('revealAnswerButton is undefined');
 
-    spyOn(component, 'canRevealAnswer').and.returnValue(false);
+    vi.spyOn(component, 'canRevealAnswer').mockReturnValue(false);
 
-    const handleRevealAnswerSpy = spyOn(component, 'handleRevealAnswer');
+    const handleRevealAnswerSpy = vi.spyOn(component, 'handleRevealAnswer');
 
     revealAnswerButton.nativeElement.click();
 

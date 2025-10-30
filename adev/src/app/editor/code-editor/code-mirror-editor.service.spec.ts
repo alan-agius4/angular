@@ -66,10 +66,10 @@ export class FakeEmbeddedTutorialManager {
 }
 
 class MockWorker {
-  addEventListener = jasmine.createSpy('addEventListener');
-  postMessage = jasmine.createSpy('postMessage');
-  removeEventListener = jasmine.createSpy('removeEventListener');
-  terminate = jasmine.createSpy('terminate');
+  addEventListener = vi.fn();
+  postMessage = vi.fn();
+  removeEventListener = vi.fn();
+  terminate = vi.fn();
 }
 
 describe('CodeMirrorEditor', () => {
@@ -158,17 +158,17 @@ describe('CodeMirrorEditor', () => {
   });
 
   it('should write the changed file content to the sandbox filesystem', () => {
-    jasmine.clock().install();
-    jasmine.clock().mockDate();
+    vi.useFakeTimers();
+    vi.setSystemTime(Date.now());
     const newContent = 'new content';
 
-    const nodeRuntimeSandboxSpy = spyOn(fakeNodeRuntimeSandbox, 'writeFile');
+    const nodeRuntimeSandboxSpy = vi.spyOn(fakeNodeRuntimeSandbox, 'writeFile');
 
     dispatchDocumentChange(newContent);
-    jasmine.clock().tick(EDITOR_CONTENT_CHANGE_DELAY_MILLIES);
+    vi.advanceTimersByTime(EDITOR_CONTENT_CHANGE_DELAY_MILLIES);
 
     expect(nodeRuntimeSandboxSpy).toHaveBeenCalledWith(service.currentFile().filename, newContent);
-    jasmine.clock().uninstall();
+    vi.useRealTimers();
   });
 
   it('should add created file to code editor', async () => {

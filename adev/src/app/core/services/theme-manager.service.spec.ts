@@ -1,3 +1,4 @@
+import type {MockedObject} from 'vitest';
 /*!
  * @license
  * Copyright Google LLC All Rights Reserved.
@@ -13,12 +14,15 @@ import {LOCAL_STORAGE} from '@angular/docs';
 
 describe('ThemeManager', () => {
   let service: ThemeManager;
-  let localStorageSpy: jasmine.SpyObj<Storage>;
+  let localStorageSpy: MockedObject<Storage>;
 
   beforeEach(() => {
-    localStorageSpy = jasmine.createSpyObj<Storage>('localStorage', ['getItem', 'setItem']);
-    localStorageSpy.getItem.and.returnValue(null);
-    localStorageSpy.setItem.and.returnValue();
+    localStorageSpy = {
+      getItem: vi.fn(),
+      setItem: vi.fn(),
+    };
+    localStorageSpy.getItem.mockReturnValue(null);
+    localStorageSpy.setItem.mockReturnValue();
 
     TestBed.configureTestingModule({
       providers: [
@@ -31,7 +35,7 @@ describe('ThemeManager', () => {
   });
 
   it('should set theme based on device preferences (auto) when user did not set theme manually', () => {
-    localStorageSpy.getItem.and.returnValue(null);
+    localStorageSpy.getItem.mockReturnValue(null);
 
     service = TestBed.inject(ThemeManager);
 
@@ -39,7 +43,7 @@ describe('ThemeManager', () => {
   });
 
   it('should set theme based on stored user preferences (dark) when user already set theme manually', () => {
-    localStorageSpy.getItem.and.returnValue('dark');
+    localStorageSpy.getItem.mockReturnValue('dark');
 
     service = TestBed.inject(ThemeManager);
 
@@ -47,7 +51,7 @@ describe('ThemeManager', () => {
   });
 
   it('should set theme based on stored user preferences (light) when user already set theme manually', () => {
-    localStorageSpy.getItem.and.returnValue('light');
+    localStorageSpy.getItem.mockReturnValue('light');
 
     service = TestBed.inject(ThemeManager);
 
@@ -55,7 +59,7 @@ describe('ThemeManager', () => {
   });
 
   it('should set theme based on stored user preferences (auto) when user already set theme manually', () => {
-    localStorageSpy.getItem.and.returnValue('auto');
+    localStorageSpy.getItem.mockReturnValue('auto');
 
     service = TestBed.inject(ThemeManager);
 

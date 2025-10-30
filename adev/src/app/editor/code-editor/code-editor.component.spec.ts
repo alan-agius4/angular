@@ -1,3 +1,4 @@
+import type {Mock} from 'vitest';
 /*!
  * @license
  * Copyright Google LLC All Rights Reserved.
@@ -102,14 +103,14 @@ describe('CodeEditor', () => {
 
   it('should initialize the code editor service with the code editor wrapper element', async () => {
     // Spy should be init before the fixture is created
-    const codeMirrorEditorInitSpy = spyOn(codeMirrorEditorService, 'init');
+    const codeMirrorEditorInitSpy = vi.spyOn(codeMirrorEditorService, 'init');
 
     fixture = TestBed.createComponent(CodeEditor);
     fixture.detectChanges();
     component = fixture.componentInstance;
 
     expect(component.codeEditorWrapperRef()).toBeDefined();
-    expect(codeMirrorEditorService.isInit).toBeTrue();
+    expect(codeMirrorEditorService.isInit).toBe(true);
 
     expect(codeMirrorEditorInitSpy).toHaveBeenCalled();
   });
@@ -131,10 +132,10 @@ describe('CodeEditor', () => {
   });
 
   describe('Tabs selection', () => {
-    let codeMirrorEditorChangeCurrentFileSpy: jasmine.Spy<(fileName: string) => void>;
+    let codeMirrorEditorChangeCurrentFileSpy: Mock;
 
     beforeEach(() => {
-      codeMirrorEditorChangeCurrentFileSpy = spyOn(codeMirrorEditorService, 'changeCurrentFile');
+      codeMirrorEditorChangeCurrentFileSpy = vi.spyOn(codeMirrorEditorService, 'changeCurrentFile');
     });
 
     it('should change file content when clicking on an unselected tab', async () => {
@@ -167,7 +168,7 @@ describe('CodeEditor', () => {
       const matTabGroup = await loader.getHarness(MatTabGroupHarness);
       const tabs = await matTabGroup.getTabs();
 
-      expect(await tabs[files.length].isSelected()).toBeTrue();
+      expect(await tabs[files.length].isSelected()).toBe(true);
     });
 
     it('should change file content when clicking on unselected tab while creating a new file', async () => {
@@ -191,7 +192,7 @@ describe('CodeEditor', () => {
       await tabs[1].select();
       expect(codeMirrorEditorChangeCurrentFileSpy).toHaveBeenCalledWith(files[1].filename);
 
-      codeMirrorEditorChangeCurrentFileSpy.calls.reset();
+      codeMirrorEditorChangeCurrentFileSpy.mockClear();
 
       await tabs[files.length].select();
       expect(codeMirrorEditorChangeCurrentFileSpy).not.toHaveBeenCalled();
@@ -219,9 +220,9 @@ describe('CodeEditor', () => {
     const tooltip = await loader.getHarness(
       MatTooltipHarness.with({selector: '.adev-editor-download-button'}),
     );
-    expect(await tooltip.isOpen()).toBeFalse();
+    expect(await tooltip.isOpen()).toBe(false);
     await tooltip.show();
-    expect(await tooltip.isOpen()).toBeTrue();
+    expect(await tooltip.isOpen()).toBe(true);
   });
 
   it('should be able to get the tooltip message on the download button', async () => {

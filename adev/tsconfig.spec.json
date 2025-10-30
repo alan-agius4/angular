@@ -3,7 +3,11 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "outDir": "../../out-tsc/spec",
-    "types": ["jasmine"]
+    "types": ["vitest/globals"],
+    // Path mappings can result in two versions of e.g. `@angular/core`.
+    // core may be linked in `adev/node_modules`, but also ESBuild does
+    // respect the tsconfig path mappings.
+    "paths": {}
   },
-  "include": ["src/app/**/*.spec.ts", "src/app/**/*.d.ts", "test-main.ts"]
+  "include": ["src/app/**/*.spec.ts", "src/app/**/*.d.ts"]
 }

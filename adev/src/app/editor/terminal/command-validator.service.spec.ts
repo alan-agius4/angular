@@ -25,12 +25,12 @@ describe('CommandValidator', () => {
   it('should return true when user try to execute allowed commands', () => {
     for (const command of ALLOWED_COMMAND_PREFIXES) {
       const result = service.validate(`${command} other command params`);
-      expect(result).toBeTrue();
+      expect(result).toBe(true);
     }
   });
 
   it('should return false when user try to execute illegal commands', () => {
     const result = service.validate(`npm install`);
-    expect(result).toBeFalse();
+    expect(result).toBe(false);
   });
 });

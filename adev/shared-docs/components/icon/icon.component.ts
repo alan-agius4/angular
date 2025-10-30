@@ -43,7 +43,7 @@ export class IconComponent {
 
     const document = inject(DOCUMENT);
     afterNextRender(async () => {
-      IconComponent.whenFontLoad ??= document.fonts.load('normal 1px "Material Symbols Outlined"');
+      IconComponent.whenFontLoad ??= document.fonts?.load('normal 1px "Material Symbols Outlined"');
       await IconComponent.whenFontLoad;
       IconComponent.isFontLoaded.set(true);
     });
