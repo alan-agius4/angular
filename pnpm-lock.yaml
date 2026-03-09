@@ -11,8 +11,6 @@ overrides:
 
 packageExtensionsChecksum: sha256-3L73Fw32UVtE6x5BJxJPBtQtH/mgsr31grNpdhHP1IY=
 
-pnpmfileChecksum: sha256-TYPFsbGgXlr65uhno3A1oHE+n2qqt8R+w/szQ+Wq97s=
-
 importers:
 
   .:
@@ -105,8 +103,8 @@ importers:
         specifier: ^7.24.2
         version: 7.57.6(@types/node@20.19.35)
       '@rollup/plugin-babel':
-        specifier: ^6.0.0
-        version: 6.1.0(@babel/core@7.29.0)(@types/babel__core@7.20.5)(rollup@4.59.0)
+        specifier: ^7.0.0
+        version: 7.0.0(@babel/core@7.29.0)(@types/babel__core@7.20.5)(rollup@4.59.0)
       '@rollup/plugin-commonjs':
         specifier: ^29.0.0
         version: 29.0.0(rollup@4.59.0)
@@ -760,21 +758,6 @@ importers:
 
   adev/shared-docs:
     dependencies:
-      '@angular/common':
-        specifier: 'workspace: *'
-        version: link:../../packages/common
-      '@angular/core':
-        specifier: 'workspace: *'
-        version: link:../../packages/core
-      '@angular/forms':
-        specifier: 'workspace: *'
-        version: link:../../packages/forms
-      '@angular/platform-browser':
-        specifier: 'workspace: *'
-        version: link:../../packages/platform-browser
-      '@angular/router':
-        specifier: 'workspace: *'
-        version: link:../../packages/router
       '@webcontainer/api':
         specifier: ^1.1.8
         version: 1.6.1
@@ -796,9 +779,6 @@ importers:
       mermaid:
         specifier: ^11.0.0
         version: 11.12.3
-      rxjs:
-        specifier: ^7.8.1
-        version: 7.8.2
       shiki:
         specifier: ^4.0.0
         version: 4.0.0
@@ -995,9 +975,6 @@ importers:
 
   packages/animations:
     dependencies:
-      '@angular/core':
-        specifier: 'workspace: *'
-        version: link:../core
       tslib:
         specifier: ^2.3.0
         version: 2.8.1
@@ -1006,19 +983,13 @@ importers:
     dependencies:
       '@angular/core':
         specifier: ^21.2.0-next
-        version: 21.2.0(@angular/compiler@packages+compiler)
+        version: 21.2.0(@angular/compiler@packages+compiler)(rxjs@7.8.2)(zone.js@0.16.1)
       reflect-metadata:
         specifier: ^0.2.0
         version: 0.2.2
 
   packages/common:
     dependencies:
-      '@angular/core':
-        specifier: 'workspace: *'
-        version: link:../core
-      rxjs:
-        specifier: ^6.5.3 || ^7.4.0
-        version: 7.8.2
       tslib:
         specifier: ^2.3.0
         version: 2.8.1
@@ -1031,9 +1002,6 @@ importers:
 
   packages/compiler-cli:
     dependencies:
-      '@angular/compiler':
-        specifier: 'workspace: *'
-        version: link:../compiler
       '@babel/core':
         specifier: 7.29.0
         version: 7.29.0
@@ -1055,12 +1023,13 @@ importers:
       tslib:
         specifier: ^2.3.0
         version: 2.8.1
-      typescript:
-        specifier: 6.0.0-beta
-        version: 6.0.0-beta
       yargs:
         specifier: ^18.0.0
         version: 18.0.0
+    devDependencies:
+      typescript:
+        specifier: 6.0.0-beta
+        version: 6.0.0-beta
 
   packages/compiler-cli/linker/babel/test:
     dependencies:
@@ -1073,18 +1042,9 @@ importers:
 
   packages/core:
     dependencies:
-      '@angular/compiler':
-        specifier: 'workspace: *'
-        version: link:../compiler
-      rxjs:
-        specifier: ^6.5.3 || ^7.4.0
-        version: 7.8.2
       tslib:
         specifier: ^2.3.0
         version: 2.8.1
-      zone.js:
-        specifier: ~0.15.0 || ~0.16.0
-        version: 0.16.1
 
   packages/core/test/bundling:
     dependencies:
@@ -1118,33 +1078,15 @@ importers:
 
   packages/elements:
     dependencies:
-      '@angular/core':
-        specifier: 'workspace: *'
-        version: link:../core
-      rxjs:
-        specifier: ^6.5.3 || ^7.4.0
-        version: 7.8.2
       tslib:
         specifier: ^2.3.0
         version: 2.8.1
 
   packages/forms:
     dependencies:
-      '@angular/common':
-        specifier: 'workspace: *'
-        version: link:../common
-      '@angular/core':
-        specifier: 'workspace: *'
-        version: link:../core
-      '@angular/platform-browser':
-        specifier: 'workspace: *'
-        version: link:../platform-browser
       '@standard-schema/spec':
         specifier: ^1.0.0
         version: 1.1.0
-      rxjs:
-        specifier: ^6.5.3 || ^7.4.0
-        version: 7.8.2
       tslib:
         specifier: ^2.3.0
         version: 2.8.1
@@ -1153,12 +1095,6 @@ importers:
 
   packages/localize:
     dependencies:
-      '@angular/compiler':
-        specifier: 'workspace: *'
-        version: link:../compiler
-      '@angular/compiler-cli':
-        specifier: 'workspace: *'
-        version: link:../compiler-cli
       '@babel/core':
         specifier: 7.29.0
         version: 7.29.0
@@ -1174,54 +1110,18 @@ importers:
 
   packages/platform-browser:
     dependencies:
-      '@angular/animations':
-        specifier: 'workspace: *'
-        version: link:../animations
-      '@angular/common':
-        specifier: 'workspace: *'
-        version: link:../common
-      '@angular/core':
-        specifier: 'workspace: *'
-        version: link:../core
       tslib:
         specifier: ^2.3.0
         version: 2.8.1
 
   packages/platform-browser-dynamic:
     dependencies:
-      '@angular/common':
-        specifier: 'workspace: *'
-        version: link:../common
-      '@angular/compiler':
-        specifier: 'workspace: *'
-        version: link:../compiler
-      '@angular/core':
-        specifier: 'workspace: *'
-        version: link:../core
-      '@angular/platform-browser':
-        specifier: 'workspace: *'
-        version: link:../platform-browser
       tslib:
         specifier: ^2.3.0
         version: 2.8.1
 
   packages/platform-server:
     dependencies:
-      '@angular/common':
-        specifier: 'workspace: *'
-        version: link:../common
-      '@angular/compiler':
-        specifier: 'workspace: *'
-        version: link:../compiler
-      '@angular/core':
-        specifier: 'workspace: *'
-        version: link:../core
-      '@angular/platform-browser':
-        specifier: 'workspace: *'
-        version: link:../platform-browser
-      rxjs:
-        specifier: ^6.5.3 || ^7.4.0
-        version: 7.8.2
       tslib:
         specifier: ^2.3.0
         version: 2.8.1
@@ -1231,18 +1131,6 @@ importers:
 
   packages/router:
     dependencies:
-      '@angular/common':
-        specifier: 'workspace: *'
-        version: link:../common
-      '@angular/core':
-        specifier: 'workspace: *'
-        version: link:../core
-      '@angular/platform-browser':
-        specifier: 'workspace: *'
-        version: link:../platform-browser
-      rxjs:
-        specifier: ^6.5.3 || ^7.4.0
-        version: 7.8.2
       tslib:
         specifier: ^2.3.0
         version: 2.8.1
@@ -1253,30 +1141,12 @@ importers:
 
   packages/service-worker:
     dependencies:
-      '@angular/core':
-        specifier: 'workspace: *'
-        version: link:../core
-      rxjs:
-        specifier: ^6.5.3 || ^7.4.0
-        version: 7.8.2
       tslib:
         specifier: ^2.3.0
         version: 2.8.1
 
   packages/upgrade:
     dependencies:
-      '@angular/compiler':
-        specifier: 'workspace: *'
-        version: link:../compiler
-      '@angular/core':
-        specifier: 'workspace: *'
-        version: link:../core
-      '@angular/platform-browser':
-        specifier: 'workspace: *'
-        version: link:../platform-browser
-      '@angular/platform-browser-dynamic':
-        specifier: 'workspace: *'
-        version: link:../platform-browser-dynamic
       tslib:
         specifier: ^2.3.0
         version: 2.8.1
@@ -1774,8 +1644,12 @@ packages:
     engines: {node: ^20.19.0 || ^22.12.0 || >=24.0.0}
     peerDependencies:
       '@angular/compiler': 21.2.0
+      rxjs: ^6.5.3 || ^7.4.0
+      zone.js: ~0.15.0 || ~0.16.0
     peerDependenciesMeta:
       '@angular/compiler':
+        optional: true
+      zone.js:
         optional: true
 
   '@angular/domino@https://codeload.github.com/angular/domino/tar.gz/93e720f143d0296dd2726ffbcf4fc12283363a7b':
@@ -4454,13 +4328,13 @@ packages:
   '@rolldown/pluginutils@1.0.0-rc.4':
     resolution: {integrity: sha512-1BrrmTu0TWfOP1riA8uakjFc9bpIUGzVKETsOtzY39pPga8zELGDl8eu1Dx7/gjM5CAz14UknsUMpBO8L+YntQ==}
 
-  '@rollup/plugin-babel@6.1.0':
-    resolution: {integrity: sha512-dFZNuFD2YRcoomP4oYf+DvQNSUA9ih+A3vUqopQx5EdtPGo3WBnQcI/S8pwpz91UsGfL0HsMSOlaMld8HrbubA==}
+  '@rollup/plugin-babel@7.0.0':
+    resolution: {integrity: sha512-NS2+P7v80N3MQqehZEjgpaFb9UyX3URNMW/zvoECKGo4PY4DvJfQusTI7BX/Ks+CPvtTfk3TqcR6S9VYBi/C+A==}
     engines: {node: '>=14.0.0'}
     peerDependencies:
       '@babel/core': ^7.0.0
       '@types/babel__core': ^7.1.9
-      rollup: ^1.20.0||^2.0.0||^3.0.0||^4.0.0
+      rollup: ^2.0.0||^3.0.0||^4.0.0
     peerDependenciesMeta:
       '@types/babel__core':
         optional: true
@@ -13647,13 +13521,13 @@ snapshots:
       - chokidar
       - supports-color
 
-  '@angular/core@21.2.0(@angular/compiler@packages+compiler)':
+  '@angular/core@21.2.0(@angular/compiler@packages+compiler)(rxjs@7.8.2)(zone.js@0.16.1)':
     dependencies:
       rxjs: 7.8.2
       tslib: 2.8.1
-      zone.js: 0.16.1
     optionalDependencies:
       '@angular/compiler': link:packages/compiler
+      zone.js: 0.16.1
 
   '@angular/domino@https://codeload.github.com/angular/domino/tar.gz/93e720f143d0296dd2726ffbcf4fc12283363a7b': {}
 
@@ -17335,7 +17209,7 @@ snapshots:
 
   '@rolldown/pluginutils@1.0.0-rc.4': {}
 
-  '@rollup/plugin-babel@6.1.0(@babel/core@7.29.0)(@types/babel__core@7.20.5)(rollup@4.59.0)':
+  '@rollup/plugin-babel@7.0.0(@babel/core@7.29.0)(@types/babel__core@7.20.5)(rollup@4.59.0)':
     dependencies:
       '@babel/core': 7.29.0
       '@babel/helper-module-imports': 7.28.6
