@@ -16,6 +16,7 @@ import {
   validateAgainstEventAttributes,
   validateAgainstEventProperties,
 } from '../../sanitization/sanitization';
+
 import {assertIndexInRange, assertNotSame} from '../../util/assert';
 import {escapeCommentText} from '../../util/dom';
 import {normalizeDebugBindingName, normalizeDebugBindingValue} from '../../ng_reflect';
@@ -63,7 +64,6 @@ import {
   getCurrentTNode,
   getElementDepthCount,
   getSelectedIndex,
-  getTView,
   increaseElementDepthCount,
   isCurrentTNodeParent,
   isInCheckNoChangesMode,
@@ -297,7 +297,9 @@ export function setDomProperty<T>(
     const element = getNativeByTNode(tNode, lView) as RElement | RComment;
 
     if (ngDevMode) {
-      validateAgainstEventProperties(propName);
+      if (lView[TVIEW].firstUpdatePass) {
+        validateAgainstEventProperties(propName);
+      }
       if (!isPropertyValid(element, propName, tNode.value, lView[TVIEW].schemas)) {
         handleUnknownPropertyError(propName, tNode.value, tNode.type, lView);
       }
@@ -506,6 +508,9 @@ export function elementAttributeInternal(
   namespace: string | null | undefined,
 ) {
   if (ngDevMode) {
+    if (lView[TVIEW].firstUpdatePass) {
+      validateAgainstEventAttributes(name);
+    }
     assertNotSame(value, NO_CHANGE as any, 'Incoming value should never be NO_CHANGE.');
     assertTNodeType(
       tNode,
@@ -513,10 +518,6 @@ export function elementAttributeInternal(
       `Attempted to set attribute \`${name}\` on a container node. ` +
         `Host bindings are not valid on ng-container or ng-template.`,
     );
-  }
-
-  if (getTView().firstUpdatePass) {
-    validateAgainstEventAttributes(name);
   }
 
   const element = getNativeByTNode(tNode, lView) as RElement;

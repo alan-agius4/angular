@@ -588,6 +588,33 @@ export function verifyHostBindings(
   const bindingParser = makeBindingParser();
   bindingParser.createDirectiveHostEventAsts(bindings.listeners, sourceSpan);
   bindingParser.createBoundHostProperties(bindings.properties, sourceSpan);
+
+  for (const propName of Object.keys(bindings.properties)) {
+    const parts = propName.split('.');
+    if (parts.length > 1 && parts[0] === 'attr') {
+      const boundPropertyName = parts.slice(1).join('.');
+      if (boundPropertyName.toLowerCase().startsWith('on')) {
+        bindingParser.errors.push(
+          new ParseError(
+            sourceSpan,
+            `Binding to event attribute '${boundPropertyName}' is disallowed for security reasons, ` +
+              `please use (${boundPropertyName.slice(2)})=...`,
+          ),
+        );
+      }
+    } else if (parts.length === 1 && propName.toLowerCase().startsWith('on')) {
+      bindingParser.errors.push(
+        new ParseError(
+          sourceSpan,
+          `Binding to event property '${propName}' is disallowed for security reasons, ` +
+            `please use (${propName.slice(2)})=...` +
+            `\nIf '${propName}' is a directive input, make sure the directive is imported by the` +
+            ` current module.`,
+        ),
+      );
+    }
+  }
+
   return bindingParser.errors;
 }
 
