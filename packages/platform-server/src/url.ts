@@ -7,23 +7,26 @@
  */
 
 /**
+ * Regular expression to check if a URL is absolute or protocol-relative.
+ * It matches URLs that start with a scheme (e.g., https:) followed by
+ * either double forward slashes (//) or double backward slashes (\\).
+ * See: https://url.spec.whatwg.org/#absolute-url
+ */
+const ABSOLUTE_OR_PROTOCOL_RELATIVE_REGEX = /^[a-zA-Z][a-zA-Z0-9+.\-]*:(\/\/|\\\\)/;
+
+/**
  * Parses and validates a URL if it is absolute or protocol-relative.
  * @returns The parsed WHATWG URL object if it is a valid absolute URL, or `null` if it is relative/non-absolute.
  * @throws An Error if the URL is structured as absolute but cannot be parsed by the WHATWG standard.
  */
 export function parseAndValidateAbsoluteUrl(url: string): URL | null {
-  const isAbsoluteOrProtocolRelative = /^[a-zA-Z][a-zA-Z0-9+.-]*:(\/\/|\\\\)/.test(url);
-  if (isAbsoluteOrProtocolRelative) {
-    try {
-      return new URL(url);
-    } catch {
-      throw new Error(`Invalid URL: ${url}`);
-    }
+  if (!ABSOLUTE_OR_PROTOCOL_RELATIVE_REGEX.test(url)) {
+    return null;
   }
 
-  if (URL.canParse(url)) {
+  try {
     return new URL(url);
+  } catch {
+    throw new Error(`Invalid URL: ${url}`);
   }
-
-  return null;
 }

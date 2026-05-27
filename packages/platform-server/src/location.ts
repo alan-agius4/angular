@@ -34,11 +34,7 @@ export function parseUrl(urlStr: string, origin: string): URL {
   }
 
   if (urlStr) {
-    urlStr = urlStr.replace(LEADING_SLASHES_REGEX, '/');
-
-    if (urlStr[0] !== '/') {
-      urlStr = `/${urlStr}`;
-    }
+    urlStr = '/' + urlStr.replace(LEADING_SLASHES_REGEX, '');
   }
 
   return new URL(origin + urlStr);
