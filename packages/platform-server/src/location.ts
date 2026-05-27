@@ -17,6 +17,7 @@ import {Inject, Injectable, Optional, ɵWritable as Writable} from '@angular/cor
 import {Subject} from 'rxjs';
 
 import {INITIAL_CONFIG, PlatformConfig} from './tokens';
+import {parseAndValidateAbsoluteUrl} from './url';
 
 const LEADING_SLASHES_REGEX = /^[/\\]+/;
 
@@ -27,16 +28,13 @@ const LEADING_SLASHES_REGEX = /^[/\\]+/;
  * @returns The parsed URL.
  */
 export function parseUrl(urlStr: string, origin: string): URL {
-  if (URL.canParse(urlStr)) {
-    return new URL(urlStr);
+  const parsedUrl = parseAndValidateAbsoluteUrl(urlStr);
+  if (parsedUrl !== null) {
+    return parsedUrl;
   }
 
   if (urlStr) {
-    urlStr = urlStr.replace(LEADING_SLASHES_REGEX, '/');
-
-    if (urlStr[0] !== '/') {
-      urlStr = `/${urlStr}`;
-    }
+    urlStr = '/' + urlStr.replace(LEADING_SLASHES_REGEX, '');
   }
 
   return new URL(origin + urlStr);
