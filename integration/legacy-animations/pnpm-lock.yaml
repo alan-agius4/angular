@@ -33,8 +33,8 @@ importers:
         specifier: ^2.3.0
         version: 2.8.1
       zone.js:
-        specifier: 0.16.1
-        version: 0.16.1
+        specifier: 0.16.2
+        version: 0.16.2
     devDependencies:
       '@angular-devkit/build-angular':
         specifier: 22.0.0-next.7
@@ -152,6 +152,7 @@ packages:
   '@angular-devkit/build-angular@22.0.0-next.7':
     resolution: {integrity: sha512-NqW61HEDRHETwaMwyCqaZOmGhgZqnUzW6n194gN6EivR+NM5ngLzhsPwriBQ00g7ByQ04dGrhSq2QBp54P9dLA==}
     engines: {node: ^22.22.0 || >=24.13.1, npm: ^6.11.0 || ^7.5.6 || >=8.0.0, yarn: '>= 1.13.0'}
+    deprecated: Angular's Webpack support is deprecated...
     peerDependencies:
       '@angular/compiler-cli': ^22.0.0-next.0
       '@angular/core': ^22.0.0-next.0
@@ -4985,8 +4986,8 @@ packages:
   zod@4.3.6:
     resolution: {integrity: sha512-rftlrkhHZOcjDwkGlnUtZZkvaPHCsDATp4pGpuOOMDaTdDDXF91wuVDJoWoPsKX/3YPQ5fHuF3STjcYyKr+Qhg==}
 
-  zone.js@0.16.1:
-    resolution: {integrity: sha512-dpvY17vxYIW3+bNrP0ClUlaiY0CiIRK3tnoLaGoQsQcY9/I/NpzIWQ7tQNhbV7LacQMpCII6wVzuL3tuWOyfuA==}
+  zone.js@0.16.2:
+    resolution: {integrity: sha512-Eky7p2Z1Ig3NnbfodSPoARCjKBSTFMnE/ACsP1L/XJEfY4SdOFce19BsUCWVwL6K5ABZFy5J3bjcMWffX+YM3Q==}
 
 snapshots:
 
@@ -10256,4 +10257,4 @@ snapshots:
 
   zod@4.3.6: {}
 
-  zone.js@0.16.1: {}
+  zone.js@0.16.2: {}
