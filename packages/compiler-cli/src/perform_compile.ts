@@ -76,12 +76,32 @@ export function readConfiguration(
   project: string,
   existingOptions?: api.CompilerOptions,
   host: ConfigurationHost = getFileSystem(),
+  extendedConfigCache?: Map<string, ts.ExtendedConfigCacheEntry>,
 ): ParsedConfiguration {
   try {
     const fs = getFileSystem();
 
-    const readConfigFile = (configFile: string) =>
-      ts.readConfigFile(configFile, (file) => host.readFile(host.resolve(file)));
+    const readConfigFile = (configFile: string) => {
+      if (extendedConfigCache) {
+        const resolvedConfigFile = host.resolve(configFile);
+        const cacheKey = fs.isCaseSensitive()
+          ? resolvedConfigFile
+          : resolvedConfigFile.toLowerCase();
+        const cacheEntry =
+          extendedConfigCache.get(cacheKey) ?? extendedConfigCache.get(resolvedConfigFile);
+
+        if (cacheEntry) {
+          return {
+            config: cacheEntry.extendedConfig?.raw ?? {},
+            error: (cacheEntry.extendedResult as {parseDiagnostics?: ts.Diagnostic[]})
+              .parseDiagnostics?.[0],
+          };
+        }
+      }
+
+      return ts.readConfigFile(configFile, (file) => host.readFile(host.resolve(file)));
+    };
+
     const readAngularCompilerOptions = (
       configFile: string,
       parentOptions: NgCompilerOptions = {},
@@ -154,6 +174,9 @@ export function readConfiguration(
       basePath,
       existingCompilerOptions,
       configFileName,
+      undefined,
+      undefined,
+      extendedConfigCache,
     );
 
     let emitFlags = api.EmitFlags.Default;

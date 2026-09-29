@@ -298,4 +298,35 @@ describe('perform_compile', () => {
       }),
     );
   });
+
+  it('should reuse cached configuration populated by extendedConfigCache across calls', () => {
+    writeSomeConfigs();
+
+    const extendedConfigCache = new Map<string, ts.ExtendedConfigCacheEntry>();
+    const {options: firstRunOptions} = readConfiguration(
+      path.resolve(basePath, 'tsconfig-level-1.json'),
+      undefined,
+      undefined,
+      extendedConfigCache,
+    );
+
+    expect(firstRunOptions.annotateForClosureCompiler).toBeTrue();
+    expect(firstRunOptions.skipMetadataEmit).toBeTrue();
+    expect(extendedConfigCache.size).toBeGreaterThan(0);
+
+    // Overwrite the file on disk with invalid JSON. If readConfiguration uses cache, it will not fail.
+    support.writeFiles({
+      'tsconfig-level-2.json': `INVALID_JSON`,
+    });
+
+    const {options: secondRunOptions} = readConfiguration(
+      path.resolve(basePath, 'tsconfig-level-1.json'),
+      undefined,
+      undefined,
+      extendedConfigCache,
+    );
+
+    expect(secondRunOptions.annotateForClosureCompiler).toBeTrue();
+    expect(secondRunOptions.skipMetadataEmit).toBeTrue();
+  });
 });
